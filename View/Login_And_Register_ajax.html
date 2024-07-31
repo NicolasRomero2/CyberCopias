@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Y Register - CyberCopias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,200;0,400;1,300&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../Assets/CSS/Style_Login_And_Register.css">
+</head>
+<body>
+    <main>
+        <div class="contenedor__todo">
+            <div class="caja__trasera">
+                <div class="caja__trasera-login">
+                    <h3>¿Ya tienes Cuenta?</h3>
+                    <p>Inicia Sesión para entrar en la página</p>
+                    <button id="btn__iniciar-sesion">Iniciar Sesión</button>
+                </div>
+                <div class="caja__trasera-register">
+                    <h3>¿Aún no tienes Cuenta?</h3>
+                    <p>Registrate para que puedas iniciar sesión</p>
+                    <button id="btn__resgistrarse">Registrarse</button>
+                </div>
+            </div>
+            <div class="contenedor__Login-Register">
+                <!--LOGIN-->
+                <form action="" class="formulario__login">
+                    <h2>Iniciar Sesión</h2>
+                    <h5>Usuario</h5>
+                    <input type="text" placeholder="Usuario" name="Usuario">
+                    <h5>Contraseña</h5>
+                    <input type="password" placeholder="Contraseña" name="Contraseña">
+                    <button type="submit">Iniciar Sesión</button>
+                    <input type="hidden" name="Id">
+                    <p id="login-error" style="color: red;"></p> <!-- Mensaje de error de inicio de sesión -->
+                </form>
+                <!--REGISTER-->
+                <form action="" class="formulario__register">
+                    <h2>Registrarse</h2>
+                    <input type="text" required placeholder="Nombre" name="Nombre">
+                    <div class="input-box">
+                        <select class="desplegable" required name="TipoDoc">
+                            <option value="0" disable select>Selecciona tu tipo de documento</option>
+                            <option value="T.I">T.I</option>
+                            <option value="C.C">C.C</option>
+                            <option value="E.E">E.E</option>
+                        </select>  
+                    </div>
+                    <input type="text" required placeholder="Número de Identificación" name="Documento">                    
+                    <input type="text" required placeholder="Dirección" name="Direccion">
+                    <input type="text" required placeholder="Teléfono" name="Telefono">
+                    <input type="text" required placeholder="Correo Electrónico" name="Correo">
+                    <input type="text" required placeholder="Usuario" name="Usuario">
+                    <input type="password" required placeholder="Contraseña" name="Contraseña">
+                    <button type="submit">Registrarse</button>
+                    <input type="hidden" name="Id">
+                </form>
+            </div>
+        </div>
+    </main>
+    <script src="../Assets/Js/script.js"></script>
+    <script>
+        const d = document,
+              $formRegister = d.querySelector(".formulario__register"),
+              $formLogin = d.querySelector(".formulario__login"),
+              $loginError = d.getElementById("login-error");
+
+        // Función para realizar una petición AJAX
+        const ajax = (options) => {
+            const { url, method, success, error, data } = options;
+            const xhr = new XMLHttpRequest();
+
+            xhr.addEventListener("readystatechange", e => {
+                if (xhr.readyState !== 4) return;
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let json = JSON.parse(xhr.responseText);
+                    success(json);
+                } else {
+                    let message = xhr.statusText || "Ocurrió un error";
+                    error(`Error ${xhr.status}: ${message}`);
+                }
+            });
+
+            xhr.open(method || "GET", url);
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr.send(JSON.stringify(data));
+        }
+
+        // Función para obtener todos los usuarios (ejemplo)
+        const getAll = () => {
+            ajax({
+                method: "GET",
+                url: "http://localhost:5000/User",
+                success: (res) => { console.log(res) },
+                error: (err) => { console.error(err) },
+                data: null
+            });
+        }
+
+        // Función para registrar un nuevo usuario
+        const registerUser = (e) => {
+            e.preventDefault();
+            const formData = new FormData($formRegister);
+            const user = {
+                Id: Date.now(),
+                Nombre: formData.get("Nombre"),
+                TipoDoc: formData.get("TipoDoc"),
+                Documento: formData.get("Documento"),
+                Direccion: formData.get("Direccion"),
+                Telefono: formData.get("Telefono"),
+                Correo: formData.get("Correo"),
+                Usuario: formData.get("Usuario"),
+                Contraseña: formData.get("Contraseña"),
+                Rol: "Empleado" // Asignar el rol de empleado
+            };
+            ajax({
+                method: "POST",
+                url: "http://localhost:5000/Empleado", // Guardar en la tabla Empleado
+                success: (res) => { 
+                    console.log("Empleado registrado:", res);
+                    alert("Empleado registrado con éxito");
+                },
+                error: (err) => { console.error(err) },
+                data: user
+            });
+        }
+
+        // Función para iniciar sesión
+        const loginUser = (e) => {
+            e.preventDefault();
+            $loginError.textContent = ""; // Limpiar mensaje de error
+            const formData = new FormData($formLogin);
+            const username = formData.get("Usuario");
+            const password = formData.get("Contraseña");
+
+            if (!username || !password) {
+                $loginError.textContent = "Todos los campos son obligatorios.";
+                return;
+            }
+
+            // Función para verificar el usuario en una tabla
+            const checkUser = (url) => {
+                return new Promise((resolve, reject) => {
+                    ajax({
+                        method: "GET",
+                        url: `${url}?Usuario=${username}`,
+                        success: (res) => resolve(res),
+                        error: (err) => reject(err),
+                        data: null
+                    });
+                });
+            };
+
+            // Verificar el usuario en ambas tablas (User y Empleado)
+            Promise.all([
+                checkUser("http://localhost:5000/User"),
+                checkUser("http://localhost:5000/Empleado")
+            ]).then(([userRes, employeeRes]) => {
+                const user = userRes[0];
+                const employee = employeeRes[0];
+                if (user && user.Contraseña === password) {
+                    console.log("Inicio de sesión exitoso");
+                    alert("Inicio de sesión exitoso");
+                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+                    window.location.href = "homeA.html";
+                } else if (employee && employee.Contraseña === password) {
+                    console.log("Inicio de sesión exitoso");
+                    alert("Inicio de sesión exitoso");
+                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+                    window.location.href = "protected_page.html";
+                } else {
+                    $loginError.textContent = "Usuario o contraseña incorrectos.";
+                }
+            }).catch((err) => {
+                console.error(err);
+                $loginError.textContent = "Error al iniciar sesión. Inténtalo de nuevo.";
+            });
+        }
+
+        // Agregar eventos al cargar el DOM
+        d.addEventListener("DOMContentLoaded", getAll);
+        $formRegister.addEventListener("submit", registerUser);
+        $formLogin.addEventListener("submit", loginUser);
+    </script>
+</body>
+</html>

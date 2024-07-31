@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrador</title>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="../Assets/CSS/style.css">
+
+    <style>
+        .home{
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    background: url(../img/wall_page-0001.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    }
+        .modules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px;
+    }
+
+        .module {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 45%;
+    }
+
+        .module h3 {
+    margin-bottom: 10px;
+    }
+
+        .credit {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 14px;
+    }
+        .footer .credit span{
+    color: var(--brown);
+    }   
+
+    </style>
+
+</head>
+<body>
+   
+   <!-- header start -->
+
+
+   <header>
+
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+   
+    <a href="#" class="logo">Cyber Copias Admin<span>.</span></a>
+
+
+    <nav class="navbar">
+        <a href="../View/Inventario.html">Inventario</a>
+        <a href="../View/Proveedores.html">Proveedores</a>
+        <a href="../View/Ventas.html">Ventas</a>
+        <a href="">Ventas en línea</a>    
+    </nav>    
+   
+   </header>
+
+
+   <!-- header ends -->
+
+
+   <!-- home start -->
+   <section class="home" id="home">
+
+
+    <div class="content">
+        <h3>Bienvenido Administrador</h3>
+        <br>
+        <br>
+        <span>En el siguiente apartado veras una puequeña explicación de cada uno de los módulos</span>
+        <a href="#modules" class="btn">Ver ahora</a>
+    </div>
+
+   </section>
+
+   <!-- home ends -->
+
+   <!-- modules start -->
+   <section id="modules" class="modules">
+    <div class="module" id="inventory">
+        <h3>Inventario</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque...</p>
+    </div>
+    <div class="module" id="providers">
+        <h3>Proveedores</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque...</p>
+    </div>
+    <div class="module" id="sales">
+        <h3>Ventas</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque...</p>
+    </div>
+    <div class="module" id="online-sales">
+        <h3>Ventas en línea</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque...</p>
+    </div>
+</section>
+<!-- modules ends -->
+
+        <div class="credit"> created by <span> Sena</span> All rights reserved</div>
+   </section>
+
+
+   <!-- foother ends -->
+
+
+</body>
+</html>
