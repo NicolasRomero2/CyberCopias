@@ -1,0 +1,67 @@
+{
+  "User": [
+    {
+      "Id": 1,
+      "Nombre": "Andres Cadena",
+      "TipoDoc": "T.I",
+      "Documento": "123456",
+      "Direccion": "cra 12 #12-43b",
+      "Telefono": "1234567",
+      "Correo": "afcadena98@soy.sena.edu.co",
+      "Usuario": "afcadena98",
+      "Contraseña": "123456789",
+      "id": "915d"
+    },
+    {
+      "Id": 2,
+      "Nombre": "Nicolas Romero",
+      "TipoDoc": "C.C",
+      "Documento": "987654",
+      "Direccion": "cra 12 #12-43b",
+      "Telefono": "1234567",
+      "Correo": "nromero891@misena.edu.co",
+      "Usuario": "nromero891",
+      "Contraseña": "987654321",
+      "id": "ac79"
+    },
+    {
+      "Id": 3,
+      "Nombre": "Alejandro Galicia",
+      "TipoDoc": "T.I",
+      "Documento": "111111",
+      "Direccion": "cra 12 #12-43b",
+      "Telefono": "1234567",
+      "Correo": "lagalicia4@soy.sena.edu.co",
+      "Usuario": "lagalicia4",
+      "Contraseña": "19082006",
+      "id": "1f0a"
+    }
+  ],
+  "Empleado": [
+    {
+      "Id": 4,
+      "Nombre": "Juan",
+      "TipoDoc": "C.C",
+      "Documento": "123456",
+      "Direccion": "cra 12 #12-43b",
+      "Telefono": "1234567",
+      "Correo": "juan@ejemplo.com",
+      "Usuario": "juan",
+      "Contraseña": "22334432234",
+      "id": "5a0b"
+    },
+    {
+      "id": "e2d6",
+      "Id": 1722181462995,
+      "Nombre": "Test1",
+      "TipoDoc": "T.I",
+      "Documento": "101233122232",
+      "Direccion": "cra21",
+      "Telefono": "12345678",
+      "Correo": "test11@test.com",
+      "Usuario": "test1",
+      "Contraseña": "test123456789",
+      "Rol": "Empleado"
+    }
+  ]
+}
