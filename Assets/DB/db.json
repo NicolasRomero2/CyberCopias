@@ -10,6 +10,7 @@
       "Correo": "afcadena98@soy.sena.edu.co",
       "Usuario": "afcadena98",
       "Contraseña": "123456789",
+      "Rol": "Administrador",
       "id": "915d"
     },
     {
@@ -22,6 +23,7 @@
       "Correo": "nromero891@misena.edu.co",
       "Usuario": "nromero891",
       "Contraseña": "987654321",
+      "Rol": "Administrador",
       "id": "ac79"
     },
     {
@@ -34,6 +36,7 @@
       "Correo": "lagalicia4@soy.sena.edu.co",
       "Usuario": "lagalicia4",
       "Contraseña": "19082006",
+      "Rol": "Administrador",
       "id": "1f0a"
     }
   ],
@@ -48,6 +51,7 @@
       "Correo": "juan@ejemplo.com",
       "Usuario": "juan",
       "Contraseña": "22334432234",
+      "Rol": "Empleado",
       "id": "5a0b"
     },
     {
@@ -62,6 +66,21 @@
       "Usuario": "test1",
       "Contraseña": "test123456789",
       "Rol": "Empleado"
+    }
+  ],
+  "Cliente": [
+    {
+      "Id": 5,
+      "Nombre": "Carlos Perez",
+      "TipoDoc": "C.C",
+      "Documento": "999999",
+      "Direccion": "cra 10 #10-10",
+      "Telefono": "9876543", 
+      "Correo": "carlosperez@ejemplo.com",
+      "Usuario": "carlosperez",
+      "Contraseña": "cliente123",
+      "Rol": "Cliente",
+      "id": "c1d2"
     }
   ]
 }

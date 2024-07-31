@@ -153,23 +153,31 @@
                 });
             };
 
-            // Verificar el usuario en ambas tablas (User y Empleado)
+            // Verificar el usuario en las tablas (User, Empleado, y Cliente)
             Promise.all([
                 checkUser("http://localhost:5000/User"),
-                checkUser("http://localhost:5000/Empleado")
-            ]).then(([userRes, employeeRes]) => {
-                const user = userRes[0];
-                const employee = employeeRes[0];
+                checkUser("http://localhost:5000/Empleado"),
+                checkUser("http://localhost:5000/Cliente")
+            ]).then(([userRes, employeeRes, clientRes]) => {
+                const user = userRes.find(u => u.Usuario === username);
+                const employee = employeeRes.find(e => e.Usuario === username);
+                const client = clientRes.find(c => c.Usuario === username);
+
                 if (user && user.Contraseña === password) {
-                    console.log("Inicio de sesión exitoso");
-                    alert("Inicio de sesión exitoso");
+                    console.log("Inicio de sesión exitoso como Administrador");
+                    alert("Inicio de sesión exitoso como Administrador");
                     localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
                     window.location.href = "homeA.html";
                 } else if (employee && employee.Contraseña === password) {
-                    console.log("Inicio de sesión exitoso");
-                    alert("Inicio de sesión exitoso");
+                    console.log("Inicio de sesión exitoso como Empleado");
+                    alert("Inicio de sesión exitoso como Empleado");
                     localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
-                    window.location.href = "protected_page.html";
+                    window.location.href = "homeA.html"; // Redirigir a la página de Administrador
+                } else if (client && client.Contraseña === password) {
+                    console.log("Inicio de sesión exitoso como Cliente");
+                    alert("Inicio de sesión exitoso como Cliente");
+                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+                    window.location.href = "homeU.html"; // Redirigir a la página de Cliente
                 } else {
                     $loginError.textContent = "Usuario o contraseña incorrectos.";
                 }
