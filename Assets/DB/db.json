@@ -66,6 +66,45 @@
       "Usuario": "test1",
       "Contraseña": "test123456789",
       "Rol": "Empleado"
+    },
+    {
+      "id": "6eff",
+      "Id": 1722443006876,
+      "Nombre": "Julian",
+      "TipoDoc": "T.I",
+      "Documento": "101212212",
+      "Direccion": "cra21",
+      "Telefono": "3218976545",
+      "Correo": "Julian@test.com",
+      "Usuario": "julian1",
+      "Contraseña": "Julian123",
+      "Rol": "Empleado"
+    },
+    {
+      "id": "475f",
+      "Id": 1722443078047,
+      "Nombre": "Julian",
+      "TipoDoc": "T.I",
+      "Documento": "101212212",
+      "Direccion": "cra21",
+      "Telefono": "3218976545",
+      "Correo": "Julian@test.com",
+      "Usuario": "julian1",
+      "Contraseña": "Julian123",
+      "Rol": "Empleado"
+    },
+    {
+      "id": "2037",
+      "Id": 1722450638476,
+      "Nombre": "Luis Lugo",
+      "TipoDoc": "T.I",
+      "Documento": "123456789",
+      "Direccion": "cra21",
+      "Telefono": "3218976545",
+      "Correo": "test11@test.com",
+      "Usuario": "luis22",
+      "Contraseña": "luis12345",
+      "Rol": "Empleado"
     }
   ],
   "Cliente": [
@@ -75,12 +114,25 @@
       "TipoDoc": "C.C",
       "Documento": "999999",
       "Direccion": "cra 10 #10-10",
-      "Telefono": "9876543", 
+      "Telefono": "9876543",
       "Correo": "carlosperez@ejemplo.com",
       "Usuario": "carlosperez",
       "Contraseña": "cliente123",
       "Rol": "Cliente",
       "id": "c1d2"
+    },
+    {
+      "id": "67b1",
+      "Id": 1722443432104,
+      "Nombre": "Paolo",
+      "TipoDoc": "T.I",
+      "Documento": "101233122232",
+      "Direccion": "cra21",
+      "Telefono": "12345678",
+      "Correo": "test11@test.com",
+      "Usuario": "paolo1",
+      "Contraseña": "paolo123",
+      "Rol": "Cliente"
     }
   ]
 }
