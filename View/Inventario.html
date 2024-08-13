@@ -28,17 +28,18 @@
         .container {
             background-color: #fff;
             padding: 20px;
-            width: 100%;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            height: calc(100vh - 100px); /* adjust the height to fit the page */
+            max-height: calc(100vh - 100px); /* adjust the max height to fit the page */
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
+            margin-bottom: 20px;
         }
-
         th, td {
             padding: 12px;
             text-align: center;
@@ -63,7 +64,14 @@
             border-radius: 5px;
             margin-top: 20px;
         }
+        .btn-text {
+        color: #000; /* Cambia el color de texto del botón a negro */
+        }
 
+        .edit, .delete {
+            padding: 5px 10px;
+            margin: 5px;
+        }
 
         .credit {
             text-align: center;
@@ -81,72 +89,110 @@
         <label for="toggler" class="fas fa-bars"></label>
         <a href="#" class="logo">Inventario<span>.</span></a>
         <nav class="navbar">
-            <a href="#">Crear</a>
-            <a href="#">Actualizar</a>
-            <a href="#">Habilitar/Deshabilitar</a>
             <a href="./homeA.html">Volver</a>
         </nav>
     </header>
     <!-- header ends -->
 
-    <!-- products start -->
-    <section class="products" id="products">
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Producto</th>
-                        <th>Precio</th>
-                        <th>Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Lapiz</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Borrador</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Cuaderno</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>1.700</td>
-                        <td>23</td>
-                    </tr>
-                </tbody>
-            </table>
-            <button>Agregar Producto</button>
-        </div>
-    </section>
-    <!-- products ends -->
+        <!-- products start -->
+        <section class="products" id="products">
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Descripcion</th>
+                            <th>Marca</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lapiz</td>
+                            <td>Grafito color negro</td>
+                            <td>Norma</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Borrador</td>
+                            <td>Descripcion del borrador</td>
+                            <td>Marca del borrador</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Cuaderno</td>
+                            <td>Descripcion del cuaderno</td>
+                            <td>Marca del cuaderno</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Descripcion del ejemplo</td>
+                            <td>Marca del ejemplo</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Descripcion del ejemplo</td>
+                            <td>Marca del ejemplo</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Descripcion del ejemplo</td>
+                            <td>Marca del ejemplo</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ejemplo</td>
+                            <td>Descripcion del ejemplo</td>
+                            <td>Marca del ejemplo</td>
+                            <td>1.700</td>
+                            <td>23</td>
+                            <td>
+                                <button class="edit">Editar</button>
+                                <button class="delete">Eliminar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button><a href="./Agregar_producto.html" class="btn-text">Agregar Producto</a></button>
+
+            </div>
+        </section>
+        <!-- products ends -->
 
 
 </body>
