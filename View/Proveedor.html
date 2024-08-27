@@ -1,65 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../Assets/CSS/style.css">
+    <link rel="stylesheet" href="../Assets/CSS/style.css" />
 
     <style>
-        .home{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    background: url(../img/wall_page-0001.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    }
-        .card {
-            margin: 20px;
-            padding: 20px;
-            width: 250px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            background-color: #fff;
-        }
+      .home {
+        display: flex;
+        align-items: center;
+        justify-content: center; /* Agregué esto para centrar horizontalmente los elementos */
+        min-height: 100vh;
+        background: url(../img/wall_page-0001.jpg) no-repeat;
+        background-size: cover;
+        background-position: center;
+        padding: 20px; /* Agregué esto para agregar un padding entre los elementos */
+      }
 
-        .card-header {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
+      .card {
+        margin: 20px;
+        padding: 20px;
+        width: 250px;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        margin-bottom: 20px; /* Agregué esto para agregar un margen entre los elementos */
+      }
 
-        .card-body {
-            padding: 20px;
-        }
+      .card-header {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .card-body {
+        padding: 20px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <input type="checkbox" name="" id="toggler">
-        <label for="toggler" class="fas fa-bars"></label>
-        <a href="#" class="logo">Proveedores<span>.</span></a> 
-        <nav class="navbar">
-            <a href="../View/homeA.html">Volver</a>
-        </nav>          
+      <input type="checkbox" name="" id="toggler" />
+      <label for="toggler" class="fas fa-bars"></label>
+      <a href="#" class="logo">Proveedores<span>.</span></a>
+      <nav class="navbar">
+        <a href="../View/homeA.html">Volver</a>
+      </nav>
     </header>
     <section class="home" id="home">
+
         <div class="card">
-            <div class="card-header">
-                <h2>Proveedor 1</h2>
-            </div>
-            <div class="card-body">
-                <p>Información del proveedor 1</p>
-                <ul>
-                    <li>Dirección: Av. Ejemplo 123</li>
-                    <li>Teléfono: 555-1234</li>
-                    <li>Email: [proveedor1@example.com](mailto:proveedor1@example.com)</li>
-                </ul>
-            </div>
+          <div class="card-header">
+            <h2>Proveedor 1</h2>
+          </div>
+          <div class="card-body">
+            <p>Información del Proveedor 1</p>
+            <ul>
+              <li>Dirección: Av. Ejemplo 123</li>
+              <li>Teléfono: 555-1234</li>
+              <li>Email: <a href="mailto:proveedor1@example.com">proveedor1@example.com</a></li>
+            </ul>
+          </div>
         </div>
-        
-    </section>
-</body>
+      
+        <div class="card">
+          <div class="card-header">
+            <h2>Proveedor 2</h2>
+          </div>
+          <div class="card-body">
+            <p>Información del Proveedor 2</p>
+            <ul>
+              <li>Dirección: Av. Ejemplo 456</li>
+              <li>Teléfono: 555-5678</li>
+              <li>Email: <a href="mailto:proveedor2@example.com">proveedor2@example.com</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="card-header">
+            <h2>Proveedor 3</h2>
+          </div>
+          <div class="card-body">
+            <p>Información del Proveedor 3</p>
+            <ul>
+              <li>Dirección: Av. Ejemplo 789</li>
+              <li>Teléfono: 555-9012</li>
+              <li>Email: <a href="mailto:proveedor3@example.com">proveedor3@example.com</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="card-header">
+            <h2>Proveedor 4</h2>
+          </div>
+          <div class="card-body">
+            <p>Información del Proveedor 4</p>
+            <ul>
+              <li>Dirección: Av. Ejemplo 1011</li>
+              <li>Teléfono: 555-1111</li>
+              <li>Email: <a href="mailto:proveedor4@example.com">proveedor4@example.com</a></li>
+            </ul>
+          </div>
+        </div>
+      
+        <div class="card">
+          <div class="card-header">
+            <h2>Proveedor 5</h2>
+          </div>
+          <div class="card-body">
+            <p>Información del Proveedor 5</p>
+            <ul>
+              <li>Dirección: Av. Ejemplo 1213</li>
+              <li>Teléfono: 555-1313</li>
+              <li>Email: <a href="mailto:proveedor5@example.com">proveedor5@example.com</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+  </body>
 </html>

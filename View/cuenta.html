@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,98 +14,120 @@
 
     <style>
         .modules {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin: 20px;
-    }
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
 
         .module {
-    background: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    margin: 10px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    }
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
 
+        button {
+            background-color: #c7a16e;
+            /* Color de fondo del botón */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #b5895a;
+            /* Color de fondo del botón al pasar el ratón */
+        }
+
+        .btn-text {
+            color: #000;
+            /* Cambia el color de texto del botón a negro */
+        }
     </style>
 
 </head>
+
 <body>
-   
-   <!-- inicio header -->
 
-   <header>
+    <!-- inicio header -->
 
-    <a href="#" class="logo">Cyber Copias<span>.</span></a>
+    <header>
 
-
-    <nav class="navbar">
-        <a href="#">Ajustes</a>
-        <a href="./homeU.html">Volver</a>
-            
-    </nav>    
-   
-   </header>
-
-   <!-- final header -->
-<!-- Empieza products -->
-   
-<section class="products" id="products">
-
-<br><br><br><br><br>
-    <h1 class="heading"> Lista De<span> Deseos</span></h1>
+        <a href="#" class="logo">Cyber Copias<span>.</span></a>
 
 
-    <div class="box-container">
+        <nav class="navbar">
+            <a href="#">Ajustes</a>
+            <a href="./homeU.html">Volver</a>
+
+        </nav>
+
+    </header>
+
+    <!-- final header -->
+    <!-- Empieza products -->
+
+    <section class="products" id="products">
+
+        <br><br><br><br><br>
+        <h1 class="heading"> Lista De<span> Deseos</span></h1>
 
 
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="..//img/prod-1.png" alt="">
+        <div class="box-container">
+
+
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="..//img/prod-1.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>Cuaderno tapa dura</h3>
+                    <div class="price">$12.99 <span></span></div>
+                </div>
             </div>
-            <div class="content">  
-                <h3>Cuaderno tapa dura</h3>
-                <div class="price">$12.99 <span></span></div>
+
+
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="../img/prod-2.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>Lapiz H2</h3>
+                    <div class="price">$12.99 <span></span></div>
+                </div>
             </div>
+
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="../img/prod-3.png" alt="">
+                </div>
+                <div class="content">
+                    <h3>Saca puntas</h3>
+                    <div class="price">$12.99 <span></span></div>
+                </div>
+            </div>
+
+    </section>
+
+    <!-- termina products -->
+
+    <section id="modules" class="modules">
+        <div class="module" id="online-sales">
+            <h1>Pedidos</h1>
+            <p>Aún no ha realizado pedidos</p>
+            <button><a href="./agregar_pedido.html" class="btn-text">Agregar Pedido</a></button>
         </div>
-
-
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-2.png" alt="">
-            </div>
-            <div class="content">  
-                <h3>Lapiz H2</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-       
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-3.png" alt="">
-            </div>
-            <div class="content">  
-                <h3>Saca puntas</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-
-</section>
-
-   <!-- termina products -->
-
-   <section id="modules" class="modules">
-   <div class="module" id="online-sales">
-    <h1>Pedidos</h1>
-    <p>Aún no ha realizado pedidos</p>
-    </div>
     </section>
 
 
 </body>
+
 </html>
