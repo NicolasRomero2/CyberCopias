@@ -12,35 +12,52 @@
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
     <style>
-        .home{
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    background: url(../img/wall_page-0001.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-}
-.btn-ver-mas {
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  padding: 10px 20px; 
-  font-size: 16px; 
-  cursor: pointer; 
-  border-radius: 5px; 
-  transition: background-color 0.3s; 
-}
+        .home {
+            display: flex;
+            align-items: center;
+            min-height: 100vh;
+            background: url(../img/wall_page-0001.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
 
-.btn-ver-mas:hover {
-  /* Estilos al hacer hover sobre el botón */
-  background-color: #3e8e41; /* Verde oscuro */
-}
+        .btn-ver-mas {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            border-radius: 5px; 
+            transition: background-color 0.3s; 
+        }
 
-.btn-ver-mas:active {
-  /* Estilos al hacer click sobre el botón */
-  background-color: #3e8e41; /* Verde oscuro */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra al hacer click */
-}
+        .btn-ver-mas:hover {
+            background-color: #3e8e41; /* Verde oscuro */
+        }
+
+        .btn-ver-mas:active {
+            background-color: #3e8e41; /* Verde oscuro */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra al hacer click */
+        }
+
+        .logout-btn {
+            background-color: #f44336;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .logout-btn:hover {
+            background-color: #c62828; /* Rojo oscuro */
+        }
     </style>
 
 </head>
@@ -49,38 +66,33 @@
    <!-- inicio header -->
 
    <header>
+        <a href="#" class="logo">Cyber Copias<span>.</span></a>
 
-    <a href="#" class="logo">Cyber Copias<span>.</span></a>
-
-
-    <nav class="navbar">
-        <a href="#home">Inicio</a>
-        <a href="#products">Productos</a>
-        <a href="#about">Información</a>
-        <a href="./cuenta.html">Cuenta</a>    
-    </nav>    
-   
+        <nav class="navbar">
+            <a href="#home">Inicio</a>
+            <a href="#products">Productos</a>
+            <a href="./Pedido.html">Pedido</a>
+            <a href="./cuenta.html">Cuenta</a>    
+        </nav>
+        
+        <button class="logout-btn" onclick="logout()">Logout</button>    
    </header>
 
    <!-- final header -->
 
-   <!-- incio home -->
+   <!-- inicio home -->
 
    <section class="home" id="home">
-
-
-    <div class="content">
-        <h3>Bienvenido Cliente</h3>
-        <br>
-        <span> Gran variedad de materiales</span>
-        <br>
-        <p>Somos tu destino para materiales de papelería de calidad. Ofrecemos una amplia gama de
-            productos, atención personalizada y un compromiso con la sostenibilidad. Tu papelería de
-            confianza.</p>
-        <a href="#products" class="btn">Ver ahora</a>
-    </div>
-
-
+        <div class="content">
+            <h3>Bienvenido Cliente</h3>
+            <br>
+            <span> Gran variedad de materiales</span>
+            <br>
+            <p>Somos tu destino para materiales de papelería de calidad. Ofrecemos una amplia gama de
+                productos, atención personalizada y un compromiso con la sostenibilidad. Tu papelería de
+                confianza.</p>
+            <a href="#products" class="btn">Ver ahora</a>
+        </div>
    </section>
 
    <!-- termina home -->
@@ -88,175 +100,95 @@
    <!-- Empieza products -->
    
    <section class="products" id="products">
+        <h1 class="heading"> Lista <span>Productos</span></h1>
 
-
-    <h1 class="heading"> Lista <span>Productos</span></h1>
-
-
-    <div class="box-container">
-
-
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-1.png" alt="">
+        <div class="box-container">
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="../img/prod-2.png" alt="">
                     <div class="icons">
-<button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>                </div>
-            </div>
-            <div class="content">  
-                <h3>Cuaderno tapa dura</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-
-
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-2.png" alt="">
-                <div class="icons">
-       <button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>
+                        <button class="btn-ver-mas" onclick="location.href='Compras.html?producto=lapiz'">Ver más</button>
+                    </div>
+                </div>
+                <div class="content">  
+                    <h3>Lapiz H2</h3>
+                    <div class="price">$12.99 <span></span></div>
                 </div>
             </div>
-            <div class="content">  
-                <h3>Lapiz H2</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-       
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-1.png" alt="">
-                <div class="icons">
-   <button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>
+           
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="../img/prod-1.png" alt="">
+                    <div class="icons">
+                        <button class="btn-ver-mas" onclick="location.href='Compras.html?producto=cuaderno'">Ver más</button>
+                    </div>
+                </div>
+                <div class="content">  
+                    <h3>Cuaderno tapa dura</h3>
+                    <div class="price">$12.99 <span></span></div>
                 </div>
             </div>
-            <div class="content">  
-                <h3>Cuaderno tapa dura</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-1.png" alt="">
-                <div class="icons">
-       <button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>
+          
+            <div class="box">
+                <span class="discount"></span>
+                <div class="image">
+                    <img src="../img/prod-3.png" alt="">
+                    <div class="icons">
+                        <button class="btn-ver-mas" onclick="location.href='Compras.html?producto=sacapuntas'">Ver más</button>
+                    </div>
+                </div>
+                <div class="content">  
+                    <h3>Saca puntas</h3>
+                    <div class="price">$12.99 <span></span></div>
                 </div>
             </div>
-            <div class="content">  
-                <h3>Cuaderno tapa dura</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
         </div>
-
-
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-2.png" alt="">
-                <div class="icons">
-       <button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>
-                </div>
-            </div>
-            <div class="content">  
-                <h3>Lapiz H2</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-       
-        <div class="box">
-            <span class="discount"></span>
-            <div class="image">
-                <img src="../img/prod-3.png" alt="">
-                <div class="icons">
-   <button class="btn-ver-mas" data-id="1" onclick="location.href='Compras.html'">Ver más</button>
-                </div>
-            </div>
-            <div class="content">  
-                <h3>Saca puntas</h3>
-                <div class="price">$12.99 <span></span></div>
-            </div>
-        </div>
-
-</section>
-
-   <!-- termina products -->
-
-   <!-- empiexa información -->
-
-   <section class="about" id="about">
-
-    <h1 class="heading"> <span> Sobre </span> Nosotros</h1>
-
-    <div class="raw">
-
-        <div class="video-container">
-            <video src="../img/Shotgun Willy – Oreo.mp4" loop autoplay muted></video>
-            <h3>La mejor papeleria</h3>
-        </div>
-
-
-        <div class="content">
-            <h3>¿Por que escojernos?</h3>
-            <p> Nuestra papelería es la elección principal cuando
-                se trata de comprar materiales de papelería. Nos enorgullece ofrecer una amplia
-                gama de productos de alta calidad a precios competitivos. Nuestra atención al cliente
-                es insuperable, brindando asesoramiento personalizado y un servicio rápido y eficiente.
-                 Además, estamos comprometidos con la sostenibilidad, promoviendo productos ecológicos.
-                 En tu búsqueda de materiales de papelería, confía en nosotros como tu opción número uno.</p>      
-        </div>
-
-    </div>
-
    </section>
 
-   <!-- Termina información -->
+   <!-- termina products -->
 
    <!-- Empieza icons -->
 
    <section class="icons-container">
-   
-    <div class="icons">
-        <img src="../img/Envios.png" alt="">
-        <div class="info">
-            <h3>Envios gratis</h3>
+        <div class="icons">
+            <img src="../img/Envios.png" alt="">
+            <div class="info">
+                <h3>Envios gratis</h3>
+            </div>
         </div>
-    </div>
-   
-    <div class="icons">
-        <img src="../img/Garantia.png" alt="">
-        <div class="info">
-            <h3>10 dias de garantia</h3>
+       
+        <div class="icons">
+            <img src="../img/Garantia.png" alt="">
+            <div class="info">
+                <h3>10 días de garantía</h3>
+            </div>
         </div>
-    </div>
 
-
-    <div class="icons">
-        <img src="../img/GiftCard.png" alt="">
-        <div class="info">
-            <h3>Ofertas  y regalos</h3>
+        <div class="icons">
+            <img src="../img/GiftCard.png" alt="">
+            <div class="info">
+                <h3>Ofertas y regalos</h3>
+            </div>
         </div>
-    </div>
-   
-    <div class="icons">
-        <img src="../img/Pagos.png" alt="">
-        <div class="info">
-            <h3>Pagos contra entrega</h3>
+       
+        <div class="icons">
+            <img src="../img/Pagos.png" alt="">
+            <div class="info">
+                <h3>Pagos contra entrega</h3>
+            </div>
         </div>
-    </div>
-</section>
+   </section>
 
-<!-- Termina icons -->
+   <!-- Termina icons -->
 
    <!-- Empieza el mapa -->
 
    <h1 class="heading"> Donde <span>Encontrarnos</span></h1>
 
-
    <div class="mapa">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9121749248006!2d-74.17444489031654!3d4.609740595345611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9e601037c9b3%3A0x14930679ef22ea64!2sCl.%2056a%20Sur%20%2378f14%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1697954227999!5m2!1ses!2sco" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.9121749248006!2d-74.17444489031654!3d4.609740595345611!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9e601037c9b3%3A0x14930679ef22ea64!2sCl.%2056a%20Sur%20%2378f14%2C%20Bogot%C3%A1!5e0!3m2!1ses!2sco!4v1697954227999!5m2!1ses!2sco" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
    </div>
 
    <!-- Termina el mapa -->
@@ -264,16 +196,12 @@
    <!-- Inicia el footer -->
 
    <section class="footer">
-
-
         <div class="box-container">
-
-
             <div class="box">
-                <h3>Enlaces rapidos</h3>
-                <a href="#home">inicio</a>
-                <a href="#products">productos</a>
-                <a href="#about">Informacion</a>
+                <h3>Enlaces rápidos</h3>
+                <a href="#home">Inicio</a>
+                <a href="#products">Productos</a>
+                <a href="#about">Información</a>
             </div>
            
             <div class="box">
@@ -284,9 +212,8 @@
                 <a href="#">3 Sector</a>
             </div>
 
-
             <div class="box">
-                <h3>Contactanos</h3>
+                <h3>Contáctanos</h3>
                 <a href="#">320 2164404</a>
                 <a href="#">cibercopiascapital@hotmail.com</a>
                 <a href="#">Nueva Roma</a>
@@ -313,5 +240,13 @@
 
    <!-- termina el footer -->
 
+   <script>
+        function logout() {
+            // Borra el clienteId del localStorage
+            localStorage.removeItem('clienteId');
+            // Redirige a la página de inicio de sesión o a la página principal
+            window.location.href = './Login_And_Register_ajax.html'; // Cambia 'login.html' a la URL de tu página de inicio de sesión
+        }
+   </script>
 </body>
 </html>

@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Agregar Pedido</title>
 
-    <!-- font awesome cdn link -->
+    <!-- Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- custom css file link -->
+    <!-- Custom CSS file link -->
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
     <style>
@@ -32,27 +32,28 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 90%;
-            height: 90%;
+            max-width: 500px;
         }
 
         form {
             width: 100%;
-            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         label {
             margin-bottom: 10px;
         }
 
-        input[type="text"] {
+        input[type="text"],
+        input[type="datetime-local"],
+        select {
             padding: 10px;
             border: 1px solid black;
             border-radius: 5px;
             width: 100%;
+            margin-bottom: 10px;
         }
 
         button[type="submit"] {
@@ -71,37 +72,114 @@
 </head>
 
 <body>
-
-    <!-- header start -->
-
-
     <header>
-
         <a href="#" class="logo">Agregar Pedido<span>.</span></a>
-
-
         <nav class="navbar">
             <a href="./Pedido.html">Volver</a>
         </nav>
-
     </header>
-    <!-- header ends -->
 
-
-
-    <!-- home start -->
     <div class="container">
-        <form>
-            <label for="pedido">Ingresa tu pedido:</label>
-            <input type="text" id="pedido" name="pedido">
-            <br>
+        <form id="addOrderForm">
+            <label for="supplierOrder">Seleccionar Proveedor</label>
+            <select id="supplierOrder" name="supplierOrder" required>
+                <!-- Opciones de proveedores serán llenadas dinámicamente -->
+            </select>
+
+            <label for="orderDate">Fecha del Pedido</label>
+            <input type="datetime-local" id="orderDate" name="orderDate" required />
+
+            <label for="orderStatus">Estado del Pedido</label>
+            <select id="orderStatus" name="orderStatus" required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Recibido">Recibido</option>
+            </select>
+
             <button type="submit">Agregar Pedido</button>
         </form>
     </div>
 
-    <!-- foother ends -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const addOrderForm = document.getElementById('addOrderForm');
+            const supplierOrderSelect = document.getElementById('supplierOrder');
 
+            // Función para realizar una petición AJAX
+            const ajax = (options) => {
+                const { url, method, success, error, data } = options;
+                const xhr = new XMLHttpRequest();
 
+                xhr.addEventListener("readystatechange", e => {
+                    if (xhr.readyState !== 4) return;
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        let json = JSON.parse(xhr.responseText);
+                        success(json);
+                    } else {
+                        let message = xhr.statusText || "Ocurrió un error";
+                        error(`Error ${xhr.status}: ${message}`);
+                    }
+                });
+
+                xhr.open(method || "GET", url);
+                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                xhr.send(JSON.stringify(data));
+            }
+
+            // Función para agregar un nuevo pedido
+            const addOrder = (e) => {
+                e.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
+
+                const formData = new FormData(addOrderForm);
+                const order = {
+                    ProveedorId: parseInt(formData.get("supplierOrder"), 10), // Asegúrate de que el ID sea un número
+                    Fecha: formData.get("orderDate"),
+                    Estado: formData.get("orderStatus")
+                };
+
+                ajax({
+                    method: "POST",
+                    url: "http://localhost:5000/Pedidos", // Endpoint de la API para agregar pedidos
+                    success: (res) => {
+                        console.log("Pedido agregado:", res);
+                        alert("Pedido agregado con éxito");
+                        addOrderForm.reset(); // Limpiar el formulario después de agregar
+                    },
+                    error: (err) => {
+                        console.error(err);
+                        alert("Error al agregar el pedido.");
+                    },
+                    data: order
+                });
+            }
+
+            // Agregar evento al formulario de pedidos
+            addOrderForm.addEventListener("submit", addOrder);
+
+            // Cargar los proveedores para el select de proveedores
+            ajax({
+                method: "GET",
+                url: "http://localhost:5000/Proveedores",
+                success: (res) => {
+                    populateSupplierSelect(res);
+                },
+                error: (err) => {
+                    console.error(err);
+                    alert("Error al cargar proveedores.");
+                }
+            });
+
+            // Función para llenar el select de proveedores
+            const populateSupplierSelect = (suppliers) => {
+                supplierOrderSelect.innerHTML = ''; // Limpiar opciones existentes
+                suppliers.forEach(supplier => {
+                    const option = document.createElement('option');
+                    option.value = supplier.Id; // Asegúrate de que el ID sea un número
+                    option.textContent = supplier.Nombre;
+                    supplierOrderSelect.appendChild(option);
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

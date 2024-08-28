@@ -3,150 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrador</title>
+    <title>Pedidos</title>
 
-    <!-- font awesome cdn link -->
+    <!-- Font Awesome CDN link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <!-- custom css file link -->
+    <!-- Custom CSS file link -->
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
     <style>
     body {
-            font-family: Arial, sans-serif;
-            background: url(../img/FondoSimple.png) no-repeat;
-            background-size: cover;
-            background-position: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-.container {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    height: 90%;
-}
-
-table {
-    width: 100%;
-    height: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #c7a16e; /* Cambia el color de fondo de los encabezados de la tabla */
-    color: #fff;
-}
-
-        .credit {
-    text-align: center;
-    margin: 20px 0;
-    font-size: 14px;
+        font-family: Arial, sans-serif;
+        background: url(../img/FondoSimple.png) no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
     }
-        .footer .credit span{
-    color: var(--brown);
-    }   
 
+    .container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #c7a16e; /* Cambia el color de fondo de los encabezados de la tabla */
+        color: #fff;
+    }
+
+    .credit {
+        text-align: center;
+        margin: 20px 0;
+        font-size: 14px;
+    }
+
+    .footer .credit span {
+        color: var(--brown);
+    }
     </style>
 
 </head>
 <body>
    
-   <!-- header start -->
-
-
+   <!-- Header start -->
    <header>
-   
-    <a href="#" class="logo">Pedidos<span>.</span></a>
-
-
-    <nav class="navbar">
-        <a href="./homeA.html">Volver</a>    
-    </nav>    
-   
+       <a href="#" class="logo">Pedidos<span>.</span></a>
+       <nav class="navbar">
+           <a href="./homeU.html">Volver</a>    
+       </nav>    
    </header>
-   <!-- header ends -->
+   <!-- Header ends -->
 
-   
-
-   <!-- home start -->
-    <div class="container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Ingresa tu pedido, ejemplo: Pedido Norma 1 (Detalles)</th>
-                    <th>Recibido</th>
-                    <th></th>
-                    <th>Hora/Dia/Mes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Pedido Norma ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-                <tr>
-                    <td>Pedido ejemplo ...</td>
-                    <td>X</td>
-                    <td>✓</td>
-                    <td>12/05/2024</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+   <!-- Main content start -->
+   <div class="container">
+       <table id="pedidos-table">
+           <thead>
+               <tr>
+                   <th>Pedido</th>
+                   <th>Recibido</th>
+                   <th>Estado</th>
+                   <th>Fecha</th>
+                   <th>Dirección</th>
+                   <th>Nombre</th>
+                   <th>Teléfono</th>
+               </tr>
+           </thead>
+           <tbody id="pedidos-tbody">
+               <!-- Los datos se llenarán aquí con JavaScript -->
+           </tbody>
+       </table>
+   </div>
+   <!-- Main content ends -->
 
 
-   </section>
+   <script>
+       document.addEventListener('DOMContentLoaded', function () {
+           const clienteId = localStorage.getItem('clienteId'); // Obtén el ID del cliente desde localStorage
 
+           if (!clienteId) {
+               console.error('No se encontró el ID del cliente.');
+               document.getElementById('pedidos-tbody').innerHTML = '<tr><td colspan="7">No se encontró el ID del cliente.</td></tr>';
+               return;
+           }
 
-   <!-- foother ends -->
+           const pedidosTableBody = document.getElementById('pedidos-tbody');
 
+           fetch('http://localhost:5000/Pedidos')
+               .then(response => response.json())
+               .then(data => {
+                   console.log('Datos de la API:', data);
 
+                   // Asegúrate de que los datos son un array
+                   const pedidos = Array.isArray(data) ? data : data.Pedidos || [];
+                   console.log('Pedidos:', pedidos);
+
+                   // Filtrar pedidos del cliente
+                   const pedidosCliente = pedidos.filter(pedido => pedido.ClienteId === parseInt(clienteId));
+                   console.log('Pedidos del Cliente:', pedidosCliente);
+
+                   // Vaciar la tabla
+                   pedidosTableBody.innerHTML = '';
+
+                   // Rellenar la tabla con los pedidos
+                   if (pedidosCliente.length > 0) {
+                       pedidosCliente.forEach(pedido => {
+                           const row = document.createElement('tr');
+                           row.innerHTML = `
+                               <td>${pedido.id}</td>
+                               <td>${pedido.Recibido ? 'Sí' : 'No'}</td>
+                               <td>${pedido.Estado}</td>
+                               <td>${new Date(pedido.Fecha).toLocaleDateString()}</td>
+                               <td>${pedido.Direccion}</td>
+                               <td>${pedido.Nombre}</td>
+                               <td>${pedido.Telefono}</td>
+                           `;
+                           pedidosTableBody.appendChild(row);
+                       });
+                   } else {
+                       pedidosTableBody.innerHTML = '<tr><td colspan="7">No se encontraron pedidos para este cliente.</td></tr>';
+                   }
+               })
+               .catch(error => {
+                   console.error('Error al cargar pedidos:', error);
+                   document.getElementById('pedidos-tbody').innerHTML = '<tr><td colspan="7">Error al cargar los pedidos.</td></tr>';
+               });
+       });
+   </script>
 </body>
 </html>

@@ -29,8 +29,10 @@
             background-color: #fff;
             padding: 20px;
             width: 100%;
+            max-width: 1200px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px; /* Ajusta el margen superior para bajar el contenedor */
         }
 
         table {
@@ -68,26 +70,22 @@
             background-color: #b5895a; /* Color de fondo del botón al pasar el ratón */
         }
 
-        .credit {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-
         .search-bar {
             width: 100%;
             margin-bottom: 20px;
+            display: flex;
+            align-items: center;
         }
 
         .search-bar input[type="text"] {
-            width: calc(100% - 20x);
+            flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px 0 0 5px;
         }
 
         .search-bar button {
-            width: 30px;
+            width: 50px;
             padding: 10px;
             border: 1px solid #ddd;
             border-left: none;
@@ -106,7 +104,7 @@
         <label for="toggler" class="fas fa-bars"></label>
         <a href="#" class="logo">Ventas<span>.</span></a>
         <nav class="navbar">
-            <a href="#">Reportes</a>
+            <a href="#" id="reportesBtn">Reportes</a>
             <a href="./homeA.html">Volver</a>
         </nav>
     </header>
@@ -116,10 +114,10 @@
     <section class="sales" id="sales">
         <div class="container">
             <div class="search-bar">
-                <input type="text" placeholder="Busca el producto vendido, ejemplo: Lápiz 2H">
+                <input type="text" id="searchInput" placeholder="Busca el producto vendido, ejemplo: Lápiz 2H">
                 <button><i class="fas fa-search"></i></button>
             </div>
-            <table>
+            <table id="salesTable">
                 <thead>
                     <tr>
                         <th>Producto</th>
@@ -128,85 +126,75 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!-- Agrega productos estáticos para prueba -->
                     <tr>
-                        <td>Lápiz H2</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
+                        <td>Lápiz</td>
+                        <td>2</td>
+                        <td>3000</td> <!-- Precio: 1500 * Cantidad: 2 -->
                     </tr>
                     <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
+                        <td>Cuaderno norma</td>
+                        <td>1</td>
+                        <td>2500</td> <!-- Precio: 2500 * Cantidad: 1 -->
                     </tr>
                     <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
+                        <td>Pincel</td>
+                        <td>3</td>
+                        <td>3000</td> <!-- Precio: 1000 * Cantidad: 3 -->
                     </tr>
                     <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
-                    </tr>
-                    <tr>
-                        <td>Ejemplo</td>
-                        <td>
-                            <select>
-                                <option value="2">2</option>
-                            </select>
-                        </td>
-                        <td>3400</td>
+                        <td>Tajalapiz</td>
+                        <td>5</td>
+                        <td>1000</td> <!-- Precio: 200 * Cantidad: 5 -->
                     </tr>
                 </tbody>
             </table>
-            <button>Terminar el día</button>
+            <button id="endDayBtn">Terminar el día</button>
         </div>
     </section>
     <!-- sales ends -->
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.getElementById('searchInput');
+            const salesTableBody = document.getElementById('salesTable').getElementsByTagName('tbody')[0];
+            const endDayBtn = document.getElementById('endDayBtn');
 
+            // Función para actualizar la tabla de ventas
+            const updateSalesTable = (sales) => {
+                salesTableBody.innerHTML = ''; // Limpiar la tabla antes de actualizar
+                sales.forEach(sale => {
+                    const row = salesTableBody.insertRow();
+                    row.insertCell(0).textContent = sale.productoNombre || 'Desconocido'; // Agregar manejo de errores
+                    row.insertCell(1).textContent = sale.cantidad;
+                    row.insertCell(2).textContent = sale.valorTotal;
+                });
+            }
+
+            // Función para filtrar la tabla de ventas
+            const filterSalesTable = () => {
+                const query = searchInput.value.toLowerCase();
+                const rows = salesTableBody.getElementsByTagName('tr');
+                Array.from(rows).forEach(row => {
+                    const cells = row.getElementsByTagName('td');
+                    const productCell = cells[0].textContent.toLowerCase();
+                    if (productCell.includes(query)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+
+            // Evento para filtrar la tabla de ventas
+            searchInput.addEventListener("input", filterSalesTable);
+
+            // Evento para terminar el día
+            endDayBtn.addEventListener("click", () => {
+                alert("Día terminado. Implementa aquí la lógica para finalizar el día.");
+                // Aquí puedes agregar la lógica para finalizar el día, como generar reportes o cerrar ventas.
+            });
+        });
+    </script>
 </body>
 </html>

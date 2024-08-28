@@ -134,5 +134,123 @@
       "Contraseña": "paolo123",
       "Rol": "Cliente"
     }
+  ],
+  "Producto": [
+    {
+      "id": "1",
+      "Nombre": "lapiz",
+      "Descripcion": "Lapiz norma grafito",
+      "Marca": "norma",
+      "Precio": 1500,
+      "Stock": 10,
+      "MinimoStock": 3
+    },
+    {
+      "id": "2912",
+      "Nombre": "cuaderno norma",
+      "Descripcion": "cuaderno norma 150 Hojas ",
+      "Marca": "norma ",
+      "Precio": 2500,
+      "Stock": 20,
+      "MinimoStock": 20
+    },
+    {
+      "id": "1724778338338",
+      "Nombre": "Pincel",
+      "Descripcion": "Pincel punta delgada",
+      "Marca": "Norma",
+      "Precio": 1000,
+      "Stock": 4,
+      "MinimoStock": 1
+    },
+    {
+      "id": "1724787084961",
+      "Nombre": "Saca puntas",
+      "Descripcion": "Saca puntas  sin basura",
+      "Marca": "Norma",
+      "Precio": 200,
+      "Stock": 20,
+      "MinimoStock": 2
+    }
+  ],
+  "Proveedores": [
+    {
+      "Id": 1,
+      "Nombre": "Proveedor 1",
+      "Telefono": "555-1234",
+      "Correo": "proveedor1@example.com",
+      "Direccion": "Av. Ejemplo 123"
+    },
+    {
+      "Id": 2,
+      "Nombre": "Proveedor 2",
+      "Telefono": "555-5678",
+      "Correo": "proveedor2@example.com",
+      "Direccion": "Av. Ejemplo 456"
+    },
+    {
+      "id": "c7c6",
+      "Nombre": "carlos",
+      "Telefono": "3022964106",
+      "Correo": "fazt30@test.com",
+      "Direccion": "cra45"
+    }
+  ],
+  "Pedidos": [
+    {
+      "Id": 1,
+      "ProveedorId": 1,
+      "Fecha": "2023-08-27T10:00:00",
+      "Estado": "Pendiente"
+    },
+    {
+      "Id": 2,
+      "ProveedorId": 2,
+      "Fecha": "2023-08-28T12:00:00",
+      "Estado": "Recibido"
+    },
+    {
+      "id": "f36d",
+      "ProveedorId": null,
+      "Fecha": "2024-08-30T15:43",
+      "Estado": "Pendiente"
+    },
+    {
+      "id": "d193",
+      "ProveedorId": null,
+      "Fecha": "2024-09-05T17:42",
+      "Estado": "Pendiente"
+    },
+    {
+      "id": "02e3",
+      "ClienteId": 5,
+      "Productos": [
+        {
+          "ProductoId": "1",
+          "Cantidad": 1
+        }
+      ],
+      "Fecha": "2024-08-28T00:52:38.648Z",
+      "Estado": "Pendiente",
+      "Direccion": "cra 56 #56-87",
+      "Nombre": "Juan",
+      "Telefono": "3025887552"
+    }
+  ],
+  "Ventas": [
+    {
+      "Id": 1,
+      "ProductoId": "2912",
+      "Cantidad": 5,
+      "ValorTotal": 7500,
+      "Fecha": "2024-08-27T14:00:00"
+    },
+    {
+      "Id": 2,
+      "ProductoId": 2,
+      "Cantidad": 3,
+      "ValorTotal": 7500,
+      "Fecha": "2024-08-27T15:00:00"
+    }
   ]
 }

@@ -4,13 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventario</title>
-
-    <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    <!-- custom css file link -->
     <link rel="stylesheet" href="../Assets/CSS/style.css">
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,180 +15,376 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
         }
-
+        header {
+            background: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #c7a16e;
+        }
+        .navbar {
+            display: flex;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #c7a16e;
+            color: #fff;
+        }
         .container {
+            background-color: #fff;
+            padding: 30px; /* Incrementar padding */
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 70%; /* Reducir el ancho para centrar mejor */
+            margin: 50px auto; /* Centramos horizontal y verticalmente */
+        }
+        .back-button {
+            background-color: #c7a16e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #a57e4e;
+        }
+        table {
+            width: 100%; /* Cambiar a 100% para ocupar todo el ancho del contenedor */
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px; /* Aumentamos el padding para hacer la tabla más grande */
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        .edit, .delete {
+            background-color: #c7a16e;
+            color: #fff;
+            border: none;
+            padding: 8px 15px; /* Hacer los botones un poco más grandes */
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            display: inline-block; /* Asegura que los botones estén en línea */
+        }
+        .edit:hover, .delete:hover {
+            background-color: #a57e4e;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex; /* Usamos flexbox para centrar el modal */
+            align-items: center; /* Centrar verticalmente */
+            justify-content: center; /* Centrar horizontalmente */
+        }
+        .modal-content {
             background-color: #fff;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-            height: calc(100vh - 100px); /* adjust the height to fit the page */
-            max-height: calc(100vh - 100px); /* adjust the max height to fit the page */
+            width: 80%;
+            max-width: 500px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
+        .modal-content h2 {
+            margin-top: 0;
         }
-        th, td {
-            padding: 12px;
-            text-align: center;
-            border: 1px solid #ddd;
+        .modal-content .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
         }
-
-        th {
-            background-color: #c7a16e; /* Cambia el color de fondo de los encabezados de la tabla */
-            color: #fff;
-        }
-
-        td {
-            background-color: #f9f9f9;
-        }
-
-        button {
-            background-color: #c7a16e; /* Color de fondo del botón */
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
+        .modal-content .close:hover,
+        .modal-content .close:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
+        }
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        form input, form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            margin-top: 20px;
         }
-        .btn-text {
-        color: #000; /* Cambia el color de texto del botón a negro */
+        form textarea {
+            resize: vertical;
+            height: 100px;
         }
-
-        .edit, .delete {
-            padding: 5px 10px;
-            margin: 5px;
+        form button {
+            background-color: #c7a16e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            display: inline-block; /* Asegura que los botones estén en línea */
         }
-
-        .credit {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 14px;
+        form button:last-child {
+            margin-right: 0; /* Elimina el margen derecho del último botón */
         }
-
+        form button:hover {
+            background-color: #a57e4e;
+        }
     </style>
 </head>
 <body>
-
     <!-- header start -->
     <header>
         <input type="checkbox" name="" id="toggler">
         <label for="toggler" class="fas fa-bars"></label>
         <a href="#" class="logo">Inventario<span>.</span></a>
         <nav class="navbar">
-            <a href="./homeA.html">Volver</a>
+            <a href="./Agregar_producto.html">Agregar Producto</a>
         </nav>
     </header>
     <!-- header ends -->
 
-        <!-- products start -->
-        <section class="products" id="products">
-            <div class="container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Producto</th>
-                            <th>Descripcion</th>
-                            <th>Marca</th>
-                            <th>Precio</th>
-                            <th>Cantidad</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Lapiz</td>
-                            <td>Grafito color negro</td>
-                            <td>Norma</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Borrador</td>
-                            <td>Descripcion del borrador</td>
-                            <td>Marca del borrador</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Cuaderno</td>
-                            <td>Descripcion del cuaderno</td>
-                            <td>Marca del cuaderno</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo</td>
-                            <td>Descripcion del ejemplo</td>
-                            <td>Marca del ejemplo</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo</td>
-                            <td>Descripcion del ejemplo</td>
-                            <td>Marca del ejemplo</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo</td>
-                            <td>Descripcion del ejemplo</td>
-                            <td>Marca del ejemplo</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Ejemplo</td>
-                            <td>Descripcion del ejemplo</td>
-                            <td>Marca del ejemplo</td>
-                            <td>1.700</td>
-                            <td>23</td>
-                            <td>
-                                <button class="edit">Editar</button>
-                                <button class="delete">Eliminar</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button><a href="./Agregar_producto.html" class="btn-text">Agregar Producto</a></button>
+    <!-- products start -->
+    <section class="products" id="products">
+        <div class="container">
+            <a href="./homeA.html" class="back-button">Volver</a>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Descripcion</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productTable">
+                    <!-- Aquí se insertarán dinámicamente los productos -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <!-- products ends -->
 
-            </div>
-        </section>
-        <!-- products ends -->
+    <!-- Modal para editar producto -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Editar Producto</h2>
+            <form id="editForm">
+                <label for="editName">Nombre del producto:</label>
+                <input type="text" id="editName" name="name" required><br>
+                <label for="editDescription">Descripción del producto:</label>
+                <textarea id="editDescription" name="description" required></textarea><br>
+                <label for="editBrand">Marca del producto:</label>
+                <input type="text" id="editBrand" name="brand" required><br>
+                <label for="editPrice">Precio del producto:</label>
+                <input type="number" id="editPrice" name="price" required><br>
+                <label for="editStock">Stock del producto:</label>
+                <input type="number" id="editStock" name="stock" required><br>
+                <label for="editMinStock">Stock mínimo del producto:</label>
+                <input type="number" id="editMinStock" name="min_stock" required><br>
+                <button type="button" id="saveButton">Guardar</button>
+                <button type="button" id="cancelButton">Cancelar</button>
+            </form>
+        </div>
+    </div>
 
+    <script>
+        const d = document;
+        const modal = d.getElementById('editModal');
+        const closeModal = d.querySelector('.close');
+        const saveButton = d.getElementById('saveButton');
+        const cancelButton = d.getElementById('cancelButton');
+        let currentProductId = null;
+        let productos = [];
 
+        // Función AJAX con Promesas
+        const ajax = (options) => {
+            return new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.open(options.method || "GET", options.url);
+                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+
+                xhr.onload = () => {
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        resolve(JSON.parse(xhr.responseText));
+                    } else {
+                        reject(new Error(`Error: ${xhr.statusText}`));
+                    }
+                };
+
+                xhr.onerror = () => reject(new Error("Network error"));
+
+                xhr.send(JSON.stringify(options.data) || null);
+            });
+        };
+
+        // Cargar productos desde la base de datos
+        const loadProducts = async () => {
+            try {
+                productos = await ajax({ method: "GET", url: "http://localhost:5000/Producto" });
+                const table = d.getElementById("productTable");
+                table.innerHTML = '';
+
+                productos.forEach(product => {
+                    const row = table.insertRow();
+                    row.innerHTML = `
+                        <td>${product.Nombre}</td>
+                        <td>${product.Descripcion}</td>
+                        <td>${product.Marca}</td>
+                        <td>${product.Precio}</td>
+                        <td>${product.Stock}</td>
+                        <td>
+                            <button class="edit" data-id="${product.Id}">Editar</button>
+                            <button class="delete" data-id="${product.Id}">Eliminar</button>
+                        </td>
+                    `;
+                });
+
+                // Eventos para editar
+                d.querySelectorAll('.edit').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const productId = button.getAttribute('data-id');
+                        showEditModal(productId);
+                    });
+                });
+
+                // Eventos para eliminar
+                d.querySelectorAll('.delete').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const productId = button.getAttribute('data-id');
+                        deleteProduct(productId);
+                    });
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        // Mostrar modal para editar
+        const showEditModal = (productId) => {
+            currentProductId = productId;
+            const producto = productos.find((producto) => String(producto.Id) === String(productId));
+            if (producto) {
+                d.getElementById('editName').value = producto.Nombre;
+                d.getElementById('editDescription').value = producto.Descripcion;
+                d.getElementById('editBrand').value = producto.Marca;
+                d.getElementById('editPrice').value = producto.Precio;
+                d.getElementById('editStock').value = producto.Stock;
+                d.getElementById('editMinStock').value = producto.MinimoStock;
+                modal.style.display = 'flex'; // Cambiar a 'flex' para usar la configuración de CSS
+            } else {
+                alert("El producto no existe");
+            }
+        };
+
+        // Actualizar un producto (con método PUT)
+        const updateProduct = async (productId, updatedProduct) => {
+            try {
+                const response = await ajax({
+                    method: "PUT",
+                    url: `http://localhost:5000/Producto/${productId}`, // Actualización vía PUT
+                    data: updatedProduct,
+                });
+
+                if (response.success) {
+                    modal.style.display = 'none';
+                    loadProducts(); // Recargar productos después de la actualización
+                    alert('Producto actualizado exitosamente');
+                } else {
+                    console.error("Error en la actualización:", response.message);
+                }
+            } catch (error) {
+                console.error(`Error actualizando el producto:`, error);
+            }
+        };
+
+        // Manejar clic en el botón de guardar
+        saveButton.addEventListener('click', async () => {
+            const updatedProduct = {
+                Nombre: d.getElementById('editName').value,
+                Descripcion: d.getElementById('editDescription').value,
+                Marca: d.getElementById('editBrand').value,
+                Precio: parseFloat(d.getElementById('editPrice').value), // Convertir precios a número decimal
+                Stock: parseInt(d.getElementById('editStock').value),    // Convertir a entero
+                MinimoStock: parseInt(d.getElementById('editMinStock').value) // Convertir a entero
+            };
+
+            try {
+                await updateProduct(currentProductId, updatedProduct);
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        // Eliminar producto
+        const deleteProduct = async (productId) => {
+            if (confirm("¿Estás seguro de que deseas eliminar este producto?")) {
+                try {
+                    await ajax({ method: "DELETE", url: `http://localhost:5000/Producto/${productId}` });
+                    loadProducts();
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+        };
+
+        // Cerrar modal
+        cancelButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+            currentProductId = null;
+        });
+
+        // Cerrar modal al hacer clic fuera del modal
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                currentProductId = null;
+            }
+        });
+
+        // Cargar productos al inicio
+        loadProducts();
+    </script>
 </body>
 </html>

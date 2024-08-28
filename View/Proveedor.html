@@ -1,125 +1,457 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
+<html lang="es">
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Módulo de Proveedores</title>
     <link rel="stylesheet" href="../Assets/CSS/style.css" />
-
     <style>
-      .home {
-        display: flex;
-        align-items: center;
-        justify-content: center; /* Agregué esto para centrar horizontalmente los elementos */
-        min-height: 100vh;
+      body {
+        font-family: Arial, sans-serif;
         background: url(../img/wall_page-0001.jpg) no-repeat;
         background-size: cover;
         background-position: center;
-        padding: 20px; /* Agregué esto para agregar un padding entre los elementos */
-      }
-
-      .card {
-        margin: 20px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    
+    header {
+        background: #fff;
+        padding: 10px 20px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .container {
+        width: 80%;
+        margin: 150px auto 20px auto; /* Aumenté el margen superior a 150px para bajar más el contenedor */
         padding: 20px;
-        width: 250px;
-        border: 1px solid #ddd;
+        background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
-        margin-bottom: 20px; /* Agregué esto para agregar un margen entre los elementos */
-      }
-
-      .card-header {
-        background-color: #f0f0f0;
+    }
+    
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    h2 {
+        margin-top: 30px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    
+    button {
+        background-color: #c7a16e;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    
+    button:hover {
+        background-color: #a57e4e;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    
+    th, td {
         padding: 10px;
-        border-bottom: 1px solid #ddd;
-      }
-
-      .card-body {
+        border: 1px solid #ddd;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #f4f4f4;
+    }
+    
+    tr:hover {
+        background-color: #f9f9f9;
+    }
+    
+    .form-container, .table-container {
+        margin-bottom: 30px;
+    }
+    
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
+        padding-top: 60px;
+    }
+    
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
         padding: 20px;
-      }
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 800px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+    
+    .modal-buttons {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .modal-buttons li {
+        margin: 0;
+    }
     </style>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <input type="checkbox" name="" id="toggler" />
-      <label for="toggler" class="fas fa-bars"></label>
-      <a href="#" class="logo">Proveedores<span>.</span></a>
-      <nav class="navbar">
-        <a href="../View/homeA.html">Volver</a>
-      </nav>
+        <a href="#" class="logo">Proveedores<span>.</span></a>
+        <nav class="navbar">
+            <a href="../View/homeA.html">Volver</a>
+        </nav>
     </header>
-    <section class="home" id="home">
 
-        <div class="card">
-          <div class="card-header">
-            <h2>Proveedor 1</h2>
-          </div>
-          <div class="card-body">
-            <p>Información del Proveedor 1</p>
-            <ul>
-              <li>Dirección: Av. Ejemplo 123</li>
-              <li>Teléfono: 555-1234</li>
-              <li>Email: <a href="mailto:proveedor1@example.com">proveedor1@example.com</a></li>
-            </ul>
-          </div>
+    <div class="container">
+        <h1>Gestión de Proveedores</h1>
+
+        <!-- Botones para mostrar modales -->
+        <div class="modal-buttons">
+            <li><button id="showAddSupplierModal">Agregar Proveedor</button></li>
+            <li><button id="showAddOrderModal">Agregar Pedido</button></li>
         </div>
+
+        <!-- Tabla de proveedores centrada -->
+        <div class="table-container">
+            <h2>Lista de Proveedores</h2>
+            <table id="supplierTable">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Correo Electrónico</th>
+                        <th>Dirección</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán dinámicamente los proveedores -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Modal para agregar proveedor -->
+        <div id="addSupplierModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAddSupplierModal">&times;</span>
+                <h2>Agregar Proveedor</h2>
+                <form id="addSupplierForm">
+                    <div class="form-group">
+                        <label for="supplierName">Nombre del Proveedor</label>
+                        <input type="text" id="supplierName" name="supplierName" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono</label>
+                        <input type="tel" id="phone" name="phone" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Dirección</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    <button type="submit">Agregar Proveedor</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal para agregar pedido -->
+        <div id="addOrderModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAddOrderModal">&times;</span>
+                <h2>Agregar Pedido</h2>
+                <form id="addOrderForm">
+                    <div class="form-group">
+                        <label for="supplierOrder">Seleccionar Proveedor</label>
+                        <select id="supplierOrder" name="supplierOrder" required>
+                            <!-- Opciones dinámicas de proveedores -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="orderDate">Fecha del Pedido</label>
+                        <input type="datetime-local" id="orderDate" name="orderDate" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="orderStatus">Estado del Pedido</label>
+                        <select id="orderStatus" name="orderStatus" required>
+                            <option value="Pendiente">Pendiente</option>
+                            <option value="Recibido">Recibido</option>
+                        </select>
+                    </div>
+                    <button type="submit">Agregar Pedido</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabla de pedidos -->
+        <div class="table-container">
+            <h2>Lista de Pedidos</h2>
+            <table id="orderTable">
+                <thead>
+                    <tr>
+                        <th>Proveedor</th>
+                        <th>Fecha del Pedido</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se agregarán dinámicamente los pedidos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
       
-        <div class="card">
-          <div class="card-header">
-            <h2>Proveedor 2</h2>
-          </div>
-          <div class="card-body">
-            <p>Información del Proveedor 2</p>
-            <ul>
-              <li>Dirección: Av. Ejemplo 456</li>
-              <li>Teléfono: 555-5678</li>
-              <li>Email: <a href="mailto:proveedor2@example.com">proveedor2@example.com</a></li>
-            </ul>
-          </div>
-        </div>
-      
-        <div class="card">
-          <div class="card-header">
-            <h2>Proveedor 3</h2>
-          </div>
-          <div class="card-body">
-            <p>Información del Proveedor 3</p>
-            <ul>
-              <li>Dirección: Av. Ejemplo 789</li>
-              <li>Teléfono: 555-9012</li>
-              <li>Email: <a href="mailto:proveedor3@example.com">proveedor3@example.com</a></li>
-            </ul>
-          </div>
-        </div>
-      
-        <div class="card">
-          <div class="card-header">
-            <h2>Proveedor 4</h2>
-          </div>
-          <div class="card-body">
-            <p>Información del Proveedor 4</p>
-            <ul>
-              <li>Dirección: Av. Ejemplo 1011</li>
-              <li>Teléfono: 555-1111</li>
-              <li>Email: <a href="mailto:proveedor4@example.com">proveedor4@example.com</a></li>
-            </ul>
-          </div>
-        </div>
-      
-        <div class="card">
-          <div class="card-header">
-            <h2>Proveedor 5</h2>
-          </div>
-          <div class="card-body">
-            <p>Información del Proveedor 5</p>
-            <ul>
-              <li>Dirección: Av. Ejemplo 1213</li>
-              <li>Teléfono: 555-1313</li>
-              <li>Email: <a href="mailto:proveedor5@example.com">proveedor5@example.com</a></li>
-            </ul>
-          </div>
-        </div>
-      </section>
-  </body>
+    
+      document.addEventListener("DOMContentLoaded", () => {
+        const addSupplierForm = document.getElementById('addSupplierForm');
+        const supplierTableBody = document.getElementById('supplierTable').getElementsByTagName('tbody')[0];
+        const supplierOrderSelect = document.getElementById('supplierOrder');
+        const addOrderForm = document.getElementById('addOrderForm');
+        const orderTableBody = document.getElementById('orderTable').getElementsByTagName('tbody')[0];
+        
+        // Función para realizar una petición AJAX
+        const ajax = (options) => {
+            const { url, method, success, error, data } = options;
+            const xhr = new XMLHttpRequest();
+    
+            xhr.addEventListener("readystatechange", e => {
+                if (xhr.readyState !== 4) return;
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    let json = JSON.parse(xhr.responseText);
+                    success(json);
+                } else {
+                    let message = xhr.statusText || "Ocurrió un error";
+                    error(`Error ${xhr.status}: ${message}`);
+                }
+            });
+    
+            xhr.open(method || "GET", url);
+            xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhr.send(JSON.stringify(data));
+        }
+    
+        // Función para actualizar la tabla de proveedores
+        const updateSupplierTable = (suppliers) => {
+            supplierTableBody.innerHTML = ''; // Limpiar la tabla antes de actualizar
+            suppliers.forEach(supplier => {
+                const row = supplierTableBody.insertRow();
+                row.insertCell(0).textContent = supplier.Nombre;
+                row.insertCell(1).textContent = supplier.Telefono;
+                row.insertCell(2).textContent = supplier.Correo;
+                row.insertCell(3).textContent = supplier.Direccion;
+                const actionsCell = row.insertCell(4);
+                actionsCell.innerHTML = `
+                    <button onclick="editSupplier(${supplier.Id})">Editar</button> 
+                    <button onclick="deleteSupplier(${supplier.Id})">Eliminar</button>
+                `;
+            });
+        }
+    
+        // Función para agregar un nuevo proveedor
+        const addSupplier = (e) => {
+            e.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
+    
+            const formData = new FormData(addSupplierForm);
+            const supplier = {
+                Nombre: formData.get("supplierName"),
+                Telefono: formData.get("phone"),
+                Correo: formData.get("email"),
+                Direccion: formData.get("address")
+            };
+    
+            ajax({
+                method: "POST",
+                url: "http://localhost:5000/Proveedores", // Endpoint de la API para agregar proveedores
+                success: (res) => {
+                    console.log("Proveedor agregado:", res);
+                    alert("Proveedor agregado con éxito");
+                    updateSupplierTable([res]); // Cambié a un arreglo para actualizar la tabla
+                    document.getElementById('addSupplierModal').style.display = 'none';
+                    addSupplierForm.reset();
+                },
+                error: (err) => {
+                    console.error(err);
+                    alert("Error al agregar el proveedor.");
+                },
+                data: supplier
+            });
+        }
+    
+        // Función para agregar un nuevo pedido
+        const addOrder = (e) => {
+            e.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
+    
+            const formData = new FormData(addOrderForm);
+            const order = {
+                ProveedorId: parseInt(formData.get("supplierOrder"), 10), // Asegúrate de que el ID sea un número
+                Fecha: formData.get("orderDate"),
+                Estado: formData.get("orderStatus")
+            };
+    
+            ajax({
+                method: "POST",
+                url: "http://localhost:5000/Pedidos", // Endpoint de la API para agregar pedidos
+                success: (res) => {
+                    console.log("Pedido agregado:", res);
+                    alert("Pedido agregado con éxito");
+                    updateOrderTable([res]); // Cambié a un arreglo para actualizar la tabla
+                    document.getElementById('addOrderModal').style.display = 'none';
+                    addOrderForm.reset();
+                },
+                error: (err) => {
+                    console.error(err);
+                    alert("Error al agregar el pedido.");
+                },
+                data: order
+            });
+        }
+    
+        // Actualizar la tabla de pedidos con el nuevo pedido
+        const updateOrderTable = (orders) => {
+            orderTableBody.innerHTML = ''; // Limpiar la tabla antes de actualizar
+            orders.forEach(order => {
+                const row = orderTableBody.insertRow();
+                const supplierName = getSupplierNameById(order.ProveedorId); // Obtener el nombre del proveedor por ID
+                row.insertCell(0).textContent = supplierName || 'Proveedor Desconocido';
+                row.insertCell(1).textContent = new Date(order.Fecha).toLocaleString();
+                row.insertCell(2).textContent = order.Estado;
+                const actionsCell = row.insertCell(3);
+                actionsCell.innerHTML = `
+                    <button onclick="editOrder(${order.Id})">Editar</button> 
+                    <button onclick="deleteOrder(${order.Id})">Eliminar</button>
+                `;
+            });
+        }
+    
+        // Función para obtener el nombre del proveedor por ID
+        const getSupplierNameById = (supplierId) => {
+            const suppliers = JSON.parse(localStorage.getItem('suppliers')) || [];
+            const supplier = suppliers.find(s => s.Id === supplierId);
+            return supplier ? supplier.Nombre : 'Proveedor Desconocido';
+        }
+    
+        // Función para abrir un modal
+        const showModal = (modalId) => {
+            document.getElementById(modalId).style.display = 'block';
+        }
+    
+        // Función para cerrar un modal
+        const closeModal = (modalId) => {
+            document.getElementById(modalId).style.display = 'none';
+        }
+    
+        // Mostrar y cerrar modales
+        document.getElementById('showAddSupplierModal').addEventListener('click', () => showModal('addSupplierModal'));
+        document.getElementById('showAddOrderModal').addEventListener('click', () => showModal('addOrderModal'));
+        document.getElementById('closeAddSupplierModal').addEventListener('click', () => closeModal('addSupplierModal'));
+        document.getElementById('closeAddOrderModal').addEventListener('click', () => closeModal('addOrderModal'));
+    
+        // Agregar eventos a los formularios
+        addSupplierForm.addEventListener("submit", addSupplier);
+        addOrderForm.addEventListener("submit", addOrder);
+    
+        // Cargar los proveedores y actualizar la tabla
+        ajax({
+            method: "GET",
+            url: "http://localhost:5000/Proveedores",
+            success: (res) => {
+                updateSupplierTable(res);
+                populateSupplierSelect(res);
+                localStorage.setItem('suppliers', JSON.stringify(res)); // Guardar proveedores en localStorage
+            },
+            error: (err) => {
+                console.error(err);
+                alert("Error al cargar proveedores.");
+            }
+        });
+    
+        // Función para llenar el select de proveedores en el modal de pedidos
+        const populateSupplierSelect = (suppliers) => {
+            supplierOrderSelect.innerHTML = ''; // Limpiar opciones existentes
+            suppliers.forEach(supplier => {
+                const option = document.createElement('option');
+                option.value = supplier.Id; // Asegúrate de que el ID sea un número
+                option.textContent = supplier.Nombre;
+                supplierOrderSelect.appendChild(option);
+            });
+        }
+    
+        // Cargar los pedidos y actualizar la tabla
+        ajax({
+            method: "GET",
+            url: "http://localhost:5000/Pedidos",
+            success: (res) => {
+                updateOrderTable(res);
+            },
+            error: (err) => {
+                console.error(err);
+                alert("Error al cargar pedidos.");
+            }
+        });
+    });
+    </script>
+</body>
 </html>

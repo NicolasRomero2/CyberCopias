@@ -1,84 +1,170 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Compra y Carrito</title>
+    <title>Compra y Carrito</title>
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
-	<style>
-		/* Estilos generales */
-		body {
-			font-family: Arial, sans-serif;
-			margin: 20px;
-		}
-		
-		/* Estilos de la página de compras */
-		.compra {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			padding: 20px;
-			border: 1px solid #ddd;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-		
-.compra img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px 10px 0 0;
-  max-width: 300px; /* ajusta el ancho máximo de la imagen */
-  max-height: 200px; /* ajusta la altura máxima de la imagen */
-}
-		
-		.compra h2 {
-			font-size: 24px;
-			font-weight: bold;
-			margin-bottom: 10px;
-		}
-		
-		.compra p {
-			font-size: 16px;
-			margin-bottom: 20px;
-		}
-		
-		.precio {
-			font-size: 18px;
-			font-weight: bold;
-			color: #333;
-			margin-bottom: 20px;
-		}
-		
-		.btn-comprar, .btn-agregar-carrito {
-			background-color: #333;
-			color: #fff;
-			border: none;
-			padding: 10px 20px;
-			font-size: 16px;
-			cursor: pointer;
-			margin-bottom: 10px;
-		}
-	</style>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .compra {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 100px;
+        }
+
+        .compra img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px 10px 0 0;
+            max-width: 300px;
+            max-height: 200px;
+        }
+
+        .compra h2 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .compra p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .precio {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .btn-comprar, .btn-agregar-carrito, .btn-agregar-lista-deseos {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        /* Estilo de la notificación */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
 </head>
 <body>
 
     <header>    
-    
         <nav class="navbar">
             <a href="./homeU.html">Volver</a>
         </nav>    
-       
-       </header>
-	<!-- Página de compras -->
-	<div class="compra">
-		<img src="../img/prod-1.png" alt="Imagen del producto">
-        <div>
-            <h2>Nombre del producto</h2>
-            <p>Descripcion del producto</p>
-            <div class="precio">$12.99</div>
-            <button class="btn-comprar">Comprar</button>
-            <button class="btn-agregar-carrito">Agregar al carrito</button>
-        </div>
-	</div>
+    </header>
+
+    <!-- Página de compras -->
+    <div id="producto-container"></div>
+
+    <!-- Notificación -->
+    <div id="notification" class="notification">¡Producto agregado a la lista de deseos!</div>
+
+    <script>
+        // Obtener el parámetro de la URL
+        const params = new URLSearchParams(window.location.search);
+        const producto = params.get('producto');
+
+        // Definir los productos
+        const productos = {
+            'lapiz': {
+                nombre: 'Lápiz H2',
+                descripcion: 'Descripción del lápiz.',
+                precio: '$12.99',
+                imagen: '../img/prod-2.png'
+            },
+            'cuaderno': {
+                nombre: 'Cuaderno tapa dura',
+                descripcion: 'Descripción del cuaderno.',
+                precio: '$12.99',
+                imagen: '../img/prod-1.png'
+            },
+            'sacapuntas': {
+                nombre: 'Saca puntas',
+                descripcion: 'Descripción del saca puntas.',
+                precio: '$12.99',
+                imagen: '../img/prod-3.png'
+            }
+        };
+
+        // Mostrar el producto correspondiente
+        const productoSeleccionado = productos[producto];
+        if (productoSeleccionado) {
+            document.getElementById('producto-container').innerHTML = `
+                <div class="compra">
+                    <img src="${productoSeleccionado.imagen}" alt="Imagen del producto">
+                    <div>
+                        <h2>${productoSeleccionado.nombre}</h2>
+                        <p>${productoSeleccionado.descripcion}</p>
+                        <div class="precio">${productoSeleccionado.precio}</div>
+                        <button class="btn-comprar">Comprar</button>
+                        <button class="btn-agregar-carrito">Agregar al carrito</button>
+                        <button class="btn-agregar-lista-deseos" onclick="agregarALaListaDeDeseos('${productoSeleccionado.nombre}', '${productoSeleccionado.precio}', '${productoSeleccionado.imagen}')">Agregar a la lista de deseos</button>
+                    </div>
+                </div>
+            `;
+        } else {
+            document.getElementById('producto-container').innerHTML = '<p>Producto no encontrado.</p>';
+        }
+
+        // Función para agregar a la lista de deseos
+        function agregarALaListaDeDeseos(nombre, precio, imagen) {
+            console.log("Función agregarALaListaDeDeseos ejecutada"); // Comprobar si la función se ejecuta
+
+            let listaDeDeseos = JSON.parse(localStorage.getItem('listaDeDeseos')) || [];
+
+            const producto = {
+                nombre: nombre,
+                precio: precio,
+                imagen: imagen
+            };
+
+            listaDeDeseos.push(producto);
+            localStorage.setItem('listaDeDeseos', JSON.stringify(listaDeDeseos));
+
+            console.log("Producto agregado a lista de deseos:", producto); // Ver qué producto se está agregando
+
+            // Mostrar notificación
+            mostrarNotificacion();
+        }
+
+        // Función para mostrar la notificación temporal
+        function mostrarNotificacion() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+
+            // Ocultar la notificación después de 2 segundos
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 2000);
+        }
+    </script>
+
 </body>
 </html>

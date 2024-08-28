@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Administrador</title>
-    
-        <!-- font awesome cdn link -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    
-        <!-- custom css file link -->
-        <link rel="stylesheet" href="../Assets/CSS/style.css">	
-        <style>
-            
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
         body {
             font-family: Arial, sans-serif;
             background: url(../img/FondoSimple.png) no-repeat;
@@ -20,9 +14,39 @@
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            flex-direction: column;
             min-height: 100vh;
+        }
+        header {
+            background: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        .logo {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #c7a16e;
+        }
+        .navbar {
+            display: flex;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .navbar a:hover {
+            background-color: #c7a16e;
+            color: #fff;
         }
         .container {
             background-color: #fff;
@@ -30,76 +54,204 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 90%;
-            height: 90%;
+            margin: 20px auto;
         }
-
-        table {
+        .add-product {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .add-product label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .add-product input, .add-product textarea {
             width: 100%;
-            height: 100%;
-            border-collapse: collapse;
+            padding: 10px;
             margin-bottom: 20px;
+            border: 1px solid #ccc;
         }
-
-		.add-product {
-			background-color: #f9f9f9;
-			padding: 20px;
-			border: 1px solid #ccc;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-
-		.add-product label {
-			display: block;
-			margin-bottom: 10px;
-		}
-
-		.add-product input, .add-product textarea {
-			width: 100%;
-			padding: 10px;
-			margin-bottom: 20px;
-			border: 1px solid #ccc;
-		}
-
-		.add-product input[type="submit"] {
-			background-color: #c7a16e;
-			color: #fff;
-			padding: 10px 20px;
-			border: none;
-			border-radius: 10px;
-			cursor: pointer;
-		}
-
-		.add-product input[type="submit"]:hover {
-			background-color: #c7a16e;
-		}
-	</style>
+        .add-product input[type="submit"] {
+            background-color: #c7a16e;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .add-product input[type="submit"]:hover {
+            background-color: #a57e4e;
+        }
+        .product-info {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .product-info h3 {
+            margin-top: 0;
+        }
+    </style>
 </head>
+<body>
 <header>
-    <input type="checkbox" name="" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
     <a href="#" class="logo">Inventario<span>.</span></a>
     <nav class="navbar">
-        <a href="./homeA.html">Volver</a>
+        <a href="./Inventario.html">Volver</a>
     </nav>
 </header>
-<body>
-	<div class="container">
-		<div class="add-product">
-			<h2>Agregar Producto</h2>
-			<form>
-				<label for="name">Nombre del producto:</label>
-				<input type="text" id="name" name="name"><br><br>
-				<label for="description">Descripción del producto:</label>
-				<textarea id="description" name="description"></textarea><br><br>
-				<label for="brand">Marca del producto:</label>
-				<input type="text" id="brand" name="brand"><br><br>
-				<label for="price">Precio del producto:</label>
-				<input type="number" id="price" name="price"><br><br>
-				<label for="stock">Stock del producto:</label>
-				<input type="number" id="stock" name="stock"><br><br>
-				<input type="submit" value="Agregar Producto">
-			</form>
-		</div>
-	</div>
+    <div class="container">
+        <div class="add-product">
+            <h2>Agregar Producto</h2>
+            <form id="productForm" class="formulario__register">
+                <label for="name">Nombre del producto:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="description">Descripción del producto:</label>
+                <textarea id="description" name="description" required></textarea><br><br>
+                <label for="brand">Marca del producto:</label>
+                <input type="text" id="brand" name="brand" required><br><br>
+                <label for="price">Precio del producto:</label>
+                <input type="number" id="price" name="price" required><br><br>
+                <label for="stock">Stock del producto:</label>
+                <input type="number" id="stock" name="stock" required><br><br>
+                <label for="min_stock">Stock mínimo del producto:</label>
+                <input type="number" id="min_stock" name="min_stock" required><br><br>
+                <input type="submit" value="Agregar Producto">
+            </form>
+            <div id="productInfo" class="product-info">
+                <h3>Información del Producto</h3>
+                <p id="productDetails"></p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+		document.addEventListener("DOMContentLoaded", () => {
+            const formRegister = document.querySelector("#addSupplierForm");
+            const supplierInfo = document.querySelector("#supplierInfo");
+            const supplierDetails = document.querySelector("#supplierDetails");
+
+            // Datos iniciales
+            const suppliers = [
+                {
+                    Id: 1,
+                    Nombre: "Proveedor 1",
+                    Telefono: "555-1234",
+                    Correo: "proveedor1@example.com",
+                    Direccion: "Av. Ejemplo 123"
+                },
+                {
+                    Id: 2,
+                    Nombre: "Proveedor 2",
+                    Telefono: "555-5678",
+                    Correo: "proveedor2@example.com",
+                    Direccion: "Av. Ejemplo 456"
+                }
+            ];
+
+            // Función para realizar una petición AJAX
+            const ajax = (options) => {
+                const { url, method, success, error, data } = options;
+                const xhr = new XMLHttpRequest();
+
+                xhr.addEventListener("readystatechange", e => {
+                    if (xhr.readyState !== 4) return;
+                    if (xhr.status >= 200 && xhr.status < 300) {
+                        let json = JSON.parse(xhr.responseText);
+                        success(json);
+                    } else {
+                        let message = xhr.statusText || "Ocurrió un error";
+                        error(`Error ${xhr.status}: ${message}`);
+                    }
+                });
+
+                xhr.open(method || "GET", url);
+                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+                xhr.send(JSON.stringify(data));
+            };
+
+            // Función para registrar un nuevo proveedor
+            const registerSupplier = (e) => {
+                e.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
+                const formData = new FormData(formRegister);
+                const supplier = {
+                    Id: Date.now(),  // Genera un ID simple para el nuevo proveedor
+                    Nombre: formData.get("name"),
+                    Telefono: formData.get("phone"),
+                    Correo: formData.get("email"),
+                    Direccion: formData.get("address")
+                };
+
+                ajax({
+                    method: "POST",
+                    url: "http://localhost:5000/Proveedor", // Guardar en la tabla Proveedor
+                    success: (res) => {
+                        console.log("Proveedor registrado:", res);
+                        alert("Proveedor registrado con éxito");
+                        // Mostrar información del proveedor en el cuadro de información
+                        supplierDetails.innerHTML = `
+                            <strong>Nombre:</strong> ${res.Nombre}<br>
+                            <strong>Teléfono:</strong> ${res.Telefono}<br>
+                            <strong>Correo:</strong> ${res.Correo}<br>
+                            <strong>Dirección:</strong> ${res.Direccion}
+                        `;
+                        supplierInfo.style.display = "block";
+                        // Actualiza la tabla de proveedores
+                        suppliers.push(res);
+                        updateSupplierTable();
+                        // Cierra el modal
+                        document.getElementById('addSupplierModal').style.display = 'none';
+                        formRegister.reset();
+                    },
+                    error: (err) => {
+                        console.error(err);
+                        alert("Error al registrar el proveedor.");
+                    },
+                    data: supplier
+                });
+            };
+
+            // Función para actualizar la tabla de proveedores
+            const updateSupplierTable = () => {
+                const tableBody = document.getElementById('supplierTable').getElementsByTagName('tbody')[0];
+                tableBody.innerHTML = '';
+                suppliers.forEach((supplier, index) => {
+                    const row = tableBody.insertRow();
+                    row.insertCell(0).textContent = supplier.Nombre;
+                    row.insertCell(1).textContent = supplier.Telefono;
+                    row.insertCell(2).textContent = supplier.Correo;
+                    row.insertCell(3).textContent = supplier.Direccion;
+                    const actionsCell = row.insertCell(4);
+                    actionsCell.innerHTML = `<button onclick="editSupplier(${index})">Editar</button> <button onclick="deleteSupplier(${index})">Eliminar</button>`;
+                });
+            };
+
+            // Función para manejar el cierre del modal
+            document.getElementById('closeAddSupplierModal').addEventListener('click', () => {
+                document.getElementById('addSupplierModal').style.display = 'none';
+            });
+
+            // Agregar evento al formulario
+            formRegister.addEventListener("submit", registerSupplier);
+
+            // Función para editar un proveedor
+            window.editSupplier = (index) => {
+                // Implementar la lógica de edición de proveedor si es necesario
+            };
+
+            // Función para eliminar un proveedor
+            window.deleteSupplier = (index) => {
+                suppliers.splice(index, 1);
+                updateSupplierTable();
+            };
+
+            // Inicializa la tabla con los datos iniciales
+            updateSupplierTable();
+        });
+    </script>
 </body>
 </html>

@@ -127,65 +127,68 @@
             });
         }
 
-        // Función para iniciar sesión
-        const loginUser = (e) => {
-            e.preventDefault();
-            $loginError.textContent = ""; // Limpiar mensaje de error
-            const formData = new FormData($formLogin);
-            const username = formData.get("Usuario");
-            const password = formData.get("Contraseña");
+       // Función para iniciar sesión
+const loginUser = (e) => {
+    e.preventDefault();
+    $loginError.textContent = ""; // Limpiar mensaje de error
+    const formData = new FormData($formLogin);
+    const username = formData.get("Usuario");
+    const password = formData.get("Contraseña");
 
-            if (!username || !password) {
-                $loginError.textContent = "Todos los campos son obligatorios.";
-                return;
-            }
+    if (!username || !password) {
+        $loginError.textContent = "Todos los campos son obligatorios.";
+        return;
+    }
 
-            // Función para verificar el usuario en una tabla
-            const checkUser = (url) => {
-                return new Promise((resolve, reject) => {
-                    ajax({
-                        method: "GET",
-                        url: `${url}?Usuario=${username}`,
-                        success: (res) => resolve(res),
-                        error: (err) => reject(err),
-                        data: null
-                    });
-                });
-            };
-
-            // Verificar el usuario en las tablas (User, Empleado, y Cliente)
-            Promise.all([
-                checkUser("http://localhost:5000/User"),
-                checkUser("http://localhost:5000/Empleado"),
-                checkUser("http://localhost:5000/Cliente")
-            ]).then(([userRes, employeeRes, clientRes]) => {
-                const user = userRes.find(u => u.Usuario === username);
-                const employee = employeeRes.find(e => e.Usuario === username);
-                const client = clientRes.find(c => c.Usuario === username);
-
-                if (user && user.Contraseña === password) {
-                    console.log("Inicio de sesión exitoso como Administrador");
-                    alert("Inicio de sesión exitoso como Administrador");
-                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
-                    window.location.href = "homeA.html";
-                } else if (employee && employee.Contraseña === password) {
-                    console.log("Inicio de sesión exitoso como Empleado");
-                    alert("Inicio de sesión exitoso como Empleado");
-                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
-                    window.location.href = "homeA.html"; // Redirigir a la página de Administrador
-                } else if (client && client.Contraseña === password) {
-                    console.log("Inicio de sesión exitoso como Cliente");
-                    alert("Inicio de sesión exitoso como Cliente");
-                    localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
-                    window.location.href = "homeU.html"; // Redirigir a la página de Cliente
-                } else {
-                    $loginError.textContent = "Usuario o contraseña incorrectos.";
-                }
-            }).catch((err) => {
-                console.error(err);
-                $loginError.textContent = "Error al iniciar sesión. Inténtalo de nuevo.";
+    // Función para verificar el usuario en una tabla
+    const checkUser = (url) => {
+        return new Promise((resolve, reject) => {
+            ajax({
+                method: "GET",
+                url: `${url}?Usuario=${username}`,
+                success: (res) => resolve(res),
+                error: (err) => reject(err),
+                data: null
             });
+        });
+    };
+
+    // Verificar el usuario en las tablas (User, Empleado, y Cliente)
+    Promise.all([
+        checkUser("http://localhost:5000/User"),
+        checkUser("http://localhost:5000/Empleado"),
+        checkUser("http://localhost:5000/Cliente")
+    ]).then(([userRes, employeeRes, clientRes]) => {
+        const user = userRes.find(u => u.Usuario === username);
+        const employee = employeeRes.find(e => e.Usuario === username);
+        const client = clientRes.find(c => c.Usuario === username);
+
+        if (user && user.Contraseña === password) {
+            console.log("Inicio de sesión exitoso como Administrador");
+            alert("Inicio de sesión exitoso como Administrador");
+            localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+            localStorage.setItem("clienteId", user.Id); // Almacenar el ID del usuario
+            window.location.href = "homeA.html";
+        } else if (employee && employee.Contraseña === password) {
+            console.log("Inicio de sesión exitoso como Empleado");
+            alert("Inicio de sesión exitoso como Empleado");
+            localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+            localStorage.setItem("clienteId", employee.Id); // Almacenar el ID del empleado
+            window.location.href = "homeA.html"; // Redirigir a la página de Administrador
+        } else if (client && client.Contraseña === password) {
+            console.log("Inicio de sesión exitoso como Cliente");
+            alert("Inicio de sesión exitoso como Cliente");
+            localStorage.setItem("loggedIn", true); // Almacenar el estado de sesión
+            localStorage.setItem("clienteId", client.Id); // Almacenar el ID del cliente
+            window.location.href = "homeU.html"; // Redirigir a la página de Cliente
+        } else {
+            $loginError.textContent = "Usuario o contraseña incorrectos.";
         }
+    }).catch((err) => {
+        console.error(err);
+        $loginError.textContent = "Error al iniciar sesión. Inténtalo de nuevo.";
+    });
+}
 
         // Agregar eventos al cargar el DOM
         d.addEventListener("DOMContentLoaded", getAll);

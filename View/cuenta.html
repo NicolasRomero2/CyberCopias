@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta</title>
 
-    <!-- fuente -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
-    <!-- link del css -->
     <link rel="stylesheet" href="../Assets/CSS/style.css">
 
     <style>
@@ -29,104 +25,277 @@
             width: 100%;
         }
 
-        button {
+        .btn-text {
+            color: #000;
+        }
+
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            background-color: #f4f4f4;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .box img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        .box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .box .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .btn-eliminar {
+            background-color: #e74c3c;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #c0392b;
+        }
+
+        .agregar-pedido-btn {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .agregar-pedido-btn button {
             background-color: #c7a16e;
-            /* Color de fondo del botón */
             color: #fff;
             border: none;
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 5px;
+            font-size: 16px;
         }
 
-        button:hover {
+        .agregar-pedido-btn button:hover {
             background-color: #b5895a;
-            /* Color de fondo del botón al pasar el ratón */
         }
 
-        .btn-text {
-            color: #000;
-            /* Cambia el color de texto del botón a negro */
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-content h3 {
+            margin-top: 0;
+        }
+
+        .modal-content input,
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .modal-content button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .modal-content button:hover {
+            background-color: #555;
         }
     </style>
-
 </head>
 
 <body>
 
-    <!-- inicio header -->
-
+    <!-- Inicio header -->
     <header>
-
         <a href="#" class="logo">Cyber Copias<span>.</span></a>
-
 
         <nav class="navbar">
             <a href="#">Ajustes</a>
             <a href="./homeU.html">Volver</a>
-
         </nav>
-
     </header>
+    <!-- Final header -->
 
-    <!-- final header -->
-    <!-- Empieza products -->
-
+    <!-- Sección de Lista de Deseos -->
     <section class="products" id="products">
+        <h1 class="heading">Lista De<span> Deseos</span></h1>
 
-        <br><br><br><br><br>
-        <h1 class="heading"> Lista De<span> Deseos</span></h1>
-
-
-        <div class="box-container">
-
-
-            <div class="box">
-                <span class="discount"></span>
-                <div class="image">
-                    <img src="..//img/prod-1.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>Cuaderno tapa dura</h3>
-                    <div class="price">$12.99 <span></span></div>
-                </div>
-            </div>
-
-
-            <div class="box">
-                <span class="discount"></span>
-                <div class="image">
-                    <img src="../img/prod-2.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>Lapiz H2</h3>
-                    <div class="price">$12.99 <span></span></div>
-                </div>
-            </div>
-
-            <div class="box">
-                <span class="discount"></span>
-                <div class="image">
-                    <img src="../img/prod-3.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>Saca puntas</h3>
-                    <div class="price">$12.99 <span></span></div>
-                </div>
-            </div>
-
-    </section>
-
-    <!-- termina products -->
-
-    <section id="modules" class="modules">
-        <div class="module" id="online-sales">
-            <h1>Pedidos</h1>
-            <p>Aún no ha realizado pedidos</p>
-            <button><a href="./agregar_pedido.html" class="btn-text">Agregar Pedido</a></button>
+        <div class="box-container" id="lista-de-deseos">
+            <!-- Aquí se insertarán los productos de la lista de deseos -->
         </div>
     </section>
 
+    <!-- Sección Pedidos -->
+    <section id="modules" class="modules">
+        <div class="module agregar-pedido-btn">
+            <button onclick="abrirModal()">Agendar Pedido</button>
+        </div>
+    </section>
+
+    <!-- Modal para agendar pedido -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h3>Detalles del Pedido</h3>
+            <form id="form-pedido">
+                <label for="productos">Productos Seleccionados</label>
+                <textarea id="productos" readonly></textarea>
+
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" required>
+
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" required>
+
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" required>
+
+                <button type="submit">Enviar Pedido</button>
+                <button type="button" onclick="cerrarModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Función para cargar y mostrar los productos en la lista de deseos
+        function cargarListaDeDeseos() {
+            const listaDeDeseos = JSON.parse(localStorage.getItem('listaDeDeseos')) || [];
+            const contenedor = document.getElementById('lista-de-deseos');
+            contenedor.innerHTML = '';
+
+            if (listaDeDeseos.length === 0) {
+                contenedor.innerHTML = '<p>No hay productos en la lista de deseos.</p>';
+                return;
+            }
+
+            listaDeDeseos.forEach((producto, index) => {
+                const box = document.createElement('div');
+                box.classList.add('box');
+                box.innerHTML = `
+                    <img src="${producto.imagen}" alt="Imagen del producto">
+                    <h3>${producto.nombre}</h3>
+                    <div class="price">${producto.precio}</div>
+                    <button class="btn-eliminar" onclick="eliminarProducto(${index})">Eliminar</button>
+                `;
+                contenedor.appendChild(box);
+            });
+        }
+
+        // Función para eliminar un producto de la lista de deseos
+        function eliminarProducto(index) {
+            const listaDeDeseos = JSON.parse(localStorage.getItem('listaDeDeseos')) || [];
+            listaDeDeseos.splice(index, 1);
+            localStorage.setItem('listaDeDeseos', JSON.stringify(listaDeDeseos));
+            cargarListaDeDeseos();
+        }
+
+        // Función para abrir el modal de agendar pedido
+        function abrirModal() {
+            const listaDeDeseos = JSON.parse(localStorage.getItem('listaDeDeseos')) || [];
+            if (listaDeDeseos.length === 0) {
+                alert('No hay productos en la lista de deseos.');
+                return;
+            }
+
+            const productosTextarea = document.getElementById('productos');
+            productosTextarea.value = listaDeDeseos.map(producto => `${producto.nombre} (Cantidad: 1)`).join(', ');
+
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        // Función para cerrar el modal
+        function cerrarModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        // Enviar el pedido
+        document.getElementById('form-pedido').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const direccion = document.getElementById('direccion').value;
+            const telefono = document.getElementById('telefono').value;
+            const productos = document.getElementById('productos').value;
+
+            const pedido = {
+                ClienteId: 5, // Aquí deberías obtener el ID del cliente actual
+                Productos: productos.split(', ').map(producto => {
+                    // Esta es una aproximación simple. Idealmente, deberías manejar las cantidades y IDs.
+                    return { ProductoId: "1", Cantidad: 1 };
+                }),
+                Fecha: new Date().toISOString(),
+                Estado: "Pendiente",
+                Direccion: direccion,
+                Nombre: nombre,
+                Telefono: telefono
+            };
+
+            // Aquí puedes hacer una solicitud POST al servidor para almacenar el pedido en la base de datos
+            fetch('http://localhost:5000/Pedidos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pedido)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Pedido agendado exitosamente!');
+                cerrarModal();
+                localStorage.removeItem('listaDeDeseos'); // Limpiar la lista de deseos
+                cargarListaDeDeseos(); // Recargar la lista vacía
+            })
+            .catch(error => {
+                console.error('Error al agendar el pedido:', error);
+            });
+        });
+
+        // Cargar la lista de deseos al cargar la página
+        window.onload = cargarListaDeDeseos;
+    </script>
 
 </body>
 
