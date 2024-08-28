@@ -179,8 +179,8 @@
       "Nombre": "lapiz",
       "Descripcion": "Lapiz norma grafito",
       "Marca": "norma",
-      "Precio": 500,
-      "Stock": 10,
+      "Precio": 1500,
+      "Stock": 15,
       "MinimoStock": 3,
       "id": "1"
     },
@@ -201,15 +201,6 @@
       "Precio": 1000,
       "Stock": 4,
       "MinimoStock": 1
-    },
-    {
-      "id": "1724787084961",
-      "Nombre": "Saca puntas",
-      "Descripcion": "Saca puntas  sin basura",
-      "Marca": "Norma",
-      "Precio": 200,
-      "Stock": 20,
-      "MinimoStock": 2
     }
   ],
   "Proveedores": [
@@ -242,6 +233,27 @@
       "Telefono": "303212213",
       "Correo": "norma@norma.com",
       "Direccion": "cra23"
+    },
+    {
+      "id": "7370",
+      "Nombre": "carlos",
+      "Telefono": "3022964106",
+      "Correo": "fazt30@test.com",
+      "Direccion": "cra34"
+    },
+    {
+      "id": "e7d3",
+      "Nombre": "FirmaColor",
+      "Telefono": "555-1234",
+      "Correo": "proveedor1@example.com",
+      "Direccion": "Av. Ejemplo 123"
+    },
+    {
+      "id": "f065",
+      "Nombre": "Proveedor 3",
+      "Telefono": "555-5678",
+      "Correo": "proveedor2@example.com",
+      "Direccion": "Av. Ejemplo 456"
     }
   ],
   "Pedidos": [
