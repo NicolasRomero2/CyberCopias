@@ -113,11 +113,11 @@
                 Correo: formData.get("Correo"),
                 Usuario: formData.get("Usuario"),
                 Contraseña: formData.get("Contraseña"),
-                Rol: "Empleado" // Asignar el rol de empleado
+                Rol: "Cliente" // Asignar el rol de empleado
             };
             ajax({
                 method: "POST",
-                url: "http://localhost:5000/Empleado", // Guardar en la tabla Empleado
+                url: "http://localhost:5000/Cliente", // Guardar en la tabla Empleado
                 success: (res) => { 
                     console.log("Usuario registrado:", res);
                     alert("Usuario registrado con éxito");

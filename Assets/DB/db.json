@@ -105,6 +105,32 @@
       "Usuario": "luis22",
       "Contraseña": "luis12345",
       "Rol": "Empleado"
+    },
+    {
+      "id": "238e",
+      "Id": 1724850223881,
+      "Nombre": "Paolo",
+      "TipoDoc": "T.I",
+      "Documento": "123456789",
+      "Direccion": "cra21",
+      "Telefono": "12345678",
+      "Correo": "test12@test.com",
+      "Usuario": "test12",
+      "Contraseña": "1234567890",
+      "Rol": "Empleado"
+    },
+    {
+      "id": "91ed",
+      "Id": 1724850323216,
+      "Nombre": "Lucas",
+      "TipoDoc": "C.C",
+      "Documento": "987654321",
+      "Direccion": "cra34",
+      "Telefono": "4543454343",
+      "Correo": "test23@test.com",
+      "Usuario": "test23",
+      "Contraseña": "1234567890",
+      "Rol": "Empleado"
     }
   ],
   "Cliente": [
@@ -133,17 +159,30 @@
       "Usuario": "paolo1",
       "Contraseña": "paolo123",
       "Rol": "Cliente"
+    },
+    {
+      "id": "c8ef",
+      "Id": 1724850418718,
+      "Nombre": "Johan",
+      "TipoDoc": "T.I",
+      "Documento": "987654321",
+      "Direccion": "cra21",
+      "Telefono": "12345678",
+      "Correo": "test111@test.com",
+      "Usuario": "test111",
+      "Contraseña": "123456789",
+      "Rol": "Cliente"
     }
   ],
   "Producto": [
     {
-      "id": "1",
       "Nombre": "lapiz",
       "Descripcion": "Lapiz norma grafito",
       "Marca": "norma",
-      "Precio": 1500,
+      "Precio": 500,
       "Stock": 10,
-      "MinimoStock": 3
+      "MinimoStock": 3,
+      "id": "1"
     },
     {
       "id": "2912",
@@ -179,14 +218,16 @@
       "Nombre": "Proveedor 1",
       "Telefono": "555-1234",
       "Correo": "proveedor1@example.com",
-      "Direccion": "Av. Ejemplo 123"
+      "Direccion": "Av. Ejemplo 123",
+      "id": "73df"
     },
     {
       "Id": 2,
       "Nombre": "Proveedor 2",
       "Telefono": "555-5678",
       "Correo": "proveedor2@example.com",
-      "Direccion": "Av. Ejemplo 456"
+      "Direccion": "Av. Ejemplo 456",
+      "id": "1000"
     },
     {
       "id": "c7c6",
@@ -194,6 +235,13 @@
       "Telefono": "3022964106",
       "Correo": "fazt30@test.com",
       "Direccion": "cra45"
+    },
+    {
+      "id": "15d6",
+      "Nombre": "Norma",
+      "Telefono": "303212213",
+      "Correo": "norma@norma.com",
+      "Direccion": "cra23"
     }
   ],
   "Pedidos": [
@@ -201,13 +249,15 @@
       "Id": 1,
       "ProveedorId": 1,
       "Fecha": "2023-08-27T10:00:00",
-      "Estado": "Pendiente"
+      "Estado": "Pendiente",
+      "id": "eba9"
     },
     {
       "Id": 2,
       "ProveedorId": 2,
       "Fecha": "2023-08-28T12:00:00",
-      "Estado": "Recibido"
+      "Estado": "Recibido",
+      "id": "c429"
     },
     {
       "id": "f36d",
@@ -235,6 +285,12 @@
       "Direccion": "cra 56 #56-87",
       "Nombre": "Juan",
       "Telefono": "3025887552"
+    },
+    {
+      "id": "0603",
+      "ProveedorId": null,
+      "Fecha": "2024-10-03T08:58",
+      "Estado": "Pendiente"
     }
   ],
   "Ventas": [
@@ -243,14 +299,16 @@
       "ProductoId": "2912",
       "Cantidad": 5,
       "ValorTotal": 7500,
-      "Fecha": "2024-08-27T14:00:00"
+      "Fecha": "2024-08-27T14:00:00",
+      "id": "dc9f"
     },
     {
       "Id": 2,
       "ProductoId": 2,
       "Cantidad": 3,
       "ValorTotal": 7500,
-      "Fecha": "2024-08-27T15:00:00"
+      "Fecha": "2024-08-27T15:00:00",
+      "id": "31ce"
     }
   ]
 }

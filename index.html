@@ -73,17 +73,10 @@
 
    <!-- home ends -->
    
-   <!-- products start -->
-   
+   <!-- products section -->
    <section class="products" id="products">
-
-
     <h1 class="heading"> Lista <span>Productos</span></h1>
-
-
     <div class="box-container">
-
-
         <div class="box">
             <span class="discount"></span>
             <div class="image">
@@ -92,9 +85,9 @@
             <div class="content">  
                 <h3>Cuaderno tapa dura</h3>
                 <div class="price">$12.99 <span></span></div>
+                <a href="#" class="btn ver-mas" data-id="1">Ver más</a>
             </div>
         </div>
-
 
         <div class="box">
             <span class="discount"></span>
@@ -102,27 +95,26 @@
                 <img src="./img/prod-2.png" alt="">
             </div>
             <div class="content">  
-                <h3>Lapiz H2</h3>
+                <h3>Lápiz H2</h3>
                 <div class="price">$12.99 <span></span></div>
+                <a href="#" class="btn ver-mas" data-id="2">Ver más</a>
             </div>
         </div>
-       
+        
         <div class="box">
             <span class="discount"></span>
             <div class="image">
                 <img src="./img/prod-3.png" alt="">
             </div>
             <div class="content">  
-                <h3>Saca puntas</h3>
+                <h3>Sacapuntas</h3>
                 <div class="price">$12.99 <span></span></div>
+                <a href="#" class="btn ver-mas" data-id="3">Ver más</a>
             </div>
         </div>
-    
-    
-       
+    </div>
 </section>
 
-   <!-- products ends -->
 
    <!-- about start -->
 
@@ -268,7 +260,25 @@
 
 
    <!-- foother ends -->
+ <!-- JavaScript -->
+ <script>
+    // Simulate login status, false means not logged in
+    let isLoggedIn = false;
 
+    // Handle "Ver más" button clicks
+    document.querySelectorAll('.ver-mas').forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+            if (!isLoggedIn) {
+                // If the user is not logged in, redirect to login page
+                window.location.href = 'View/Login_And_Register_ajax.html';
+            } else {
+                // Handle the logic for logged-in users (e.g., show product details)
+                alert('Showing details for product ID: ' + this.dataset.id);
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

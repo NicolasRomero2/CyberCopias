@@ -130,128 +130,65 @@
     </div>
     
     <script>
-		document.addEventListener("DOMContentLoaded", () => {
-            const formRegister = document.querySelector("#addSupplierForm");
-            const supplierInfo = document.querySelector("#supplierInfo");
-            const supplierDetails = document.querySelector("#supplierDetails");
-
-            // Datos iniciales
-            const suppliers = [
-                {
-                    Id: 1,
-                    Nombre: "Proveedor 1",
-                    Telefono: "555-1234",
-                    Correo: "proveedor1@example.com",
-                    Direccion: "Av. Ejemplo 123"
-                },
-                {
-                    Id: 2,
-                    Nombre: "Proveedor 2",
-                    Telefono: "555-5678",
-                    Correo: "proveedor2@example.com",
-                    Direccion: "Av. Ejemplo 456"
-                }
-            ];
-
-            // Función para realizar una petición AJAX
-            const ajax = (options) => {
-                const { url, method, success, error, data } = options;
-                const xhr = new XMLHttpRequest();
-
-                xhr.addEventListener("readystatechange", e => {
-                    if (xhr.readyState !== 4) return;
-                    if (xhr.status >= 200 && xhr.status < 300) {
-                        let json = JSON.parse(xhr.responseText);
-                        success(json);
-                    } else {
-                        let message = xhr.statusText || "Ocurrió un error";
-                        error(`Error ${xhr.status}: ${message}`);
-                    }
-                });
-
-                xhr.open(method || "GET", url);
-                xhr.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                xhr.send(JSON.stringify(data));
-            };
-
-            // Función para registrar un nuevo proveedor
-            const registerSupplier = (e) => {
+        document.addEventListener("DOMContentLoaded", () => {
+            const formRegister = document.querySelector("#productForm");  // Selecciona el formulario correcto para agregar productos
+    
+            // Función para registrar un nuevo producto
+            const registerProduct = (e) => {
                 e.preventDefault();  // Prevenir el comportamiento predeterminado del formulario
                 const formData = new FormData(formRegister);
-                const supplier = {
-                    Id: Date.now(),  // Genera un ID simple para el nuevo proveedor
-                    Nombre: formData.get("name"),
-                    Telefono: formData.get("phone"),
-                    Correo: formData.get("email"),
-                    Direccion: formData.get("address")
+                const product = {
+                    name: formData.get("Nombre"),
+                    description: formData.get("Descripcion"),
+                    brand: formData.get("Marca"),
+                    price: formData.get("Precio"),
+                    stock: formData.get("Stock"),
+                    min_stock: formData.get("MinimoStock")
                 };
-
-                ajax({
+    
+                // Enviar los datos del producto al servidor mediante una solicitud POST
+                fetch("http://localhost:5000/Producto", {  // Cambia la URL según tu endpoint
                     method: "POST",
-                    url: "http://localhost:5000/Proveedor", // Guardar en la tabla Proveedor
-                    success: (res) => {
-                        console.log("Proveedor registrado:", res);
-                        alert("Proveedor registrado con éxito");
-                        // Mostrar información del proveedor en el cuadro de información
-                        supplierDetails.innerHTML = `
-                            <strong>Nombre:</strong> ${res.Nombre}<br>
-                            <strong>Teléfono:</strong> ${res.Telefono}<br>
-                            <strong>Correo:</strong> ${res.Correo}<br>
-                            <strong>Dirección:</strong> ${res.Direccion}
-                        `;
-                        supplierInfo.style.display = "block";
-                        // Actualiza la tabla de proveedores
-                        suppliers.push(res);
-                        updateSupplierTable();
-                        // Cierra el modal
-                        document.getElementById('addSupplierModal').style.display = 'none';
-                        formRegister.reset();
+                    headers: {
+                        "Content-Type": "application/json"
                     },
-                    error: (err) => {
-                        console.error(err);
-                        alert("Error al registrar el proveedor.");
-                    },
-                    data: supplier
+                    body: JSON.stringify(product)  // Convertir el objeto a JSON
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Error al guardar el producto en la base de datos");
+                    }
+                    return response.json();  // Procesar la respuesta como JSON
+                })
+                .then(data => {
+                    console.log("Producto registrado en la base de datos:", data);
+                    alert("Producto registrado con éxito");
+                    
+                    // Mostrar información del producto en el cuadro de información
+                    const productDetails = document.querySelector("#productDetails");
+                    productDetails.innerHTML = `
+                        <strong>Nombre:</strong> ${data.Nombre}<br>
+                        <strong>Descripción:</strong> ${data.Descripcion}<br>
+                        <strong>Marca:</strong> ${data.Marca}<br>
+                        <strong>Precio:</strong> ${data.Precio}<br>
+                        <strong>Stock:</strong> ${data.Stock}<br>
+                        <strong>Stock mínimo:</strong> ${data.MinimoStock}
+                    `;
+                    const productInfo = document.querySelector("#productInfo");
+                    productInfo.style.display = "block";
+    
+                    formRegister.reset();
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Error al guardar el producto en la base de datos.");
                 });
             };
-
-            // Función para actualizar la tabla de proveedores
-            const updateSupplierTable = () => {
-                const tableBody = document.getElementById('supplierTable').getElementsByTagName('tbody')[0];
-                tableBody.innerHTML = '';
-                suppliers.forEach((supplier, index) => {
-                    const row = tableBody.insertRow();
-                    row.insertCell(0).textContent = supplier.Nombre;
-                    row.insertCell(1).textContent = supplier.Telefono;
-                    row.insertCell(2).textContent = supplier.Correo;
-                    row.insertCell(3).textContent = supplier.Direccion;
-                    const actionsCell = row.insertCell(4);
-                    actionsCell.innerHTML = `<button onclick="editSupplier(${index})">Editar</button> <button onclick="deleteSupplier(${index})">Eliminar</button>`;
-                });
-            };
-
-            // Función para manejar el cierre del modal
-            document.getElementById('closeAddSupplierModal').addEventListener('click', () => {
-                document.getElementById('addSupplierModal').style.display = 'none';
-            });
-
+    
             // Agregar evento al formulario
-            formRegister.addEventListener("submit", registerSupplier);
-
-            // Función para editar un proveedor
-            window.editSupplier = (index) => {
-                // Implementar la lógica de edición de proveedor si es necesario
-            };
-
-            // Función para eliminar un proveedor
-            window.deleteSupplier = (index) => {
-                suppliers.splice(index, 1);
-                updateSupplierTable();
-            };
-
-            // Inicializa la tabla con los datos iniciales
-            updateSupplierTable();
+            formRegister.addEventListener("submit", registerProduct);
         });
     </script>
+    
 </body>
 </html>
